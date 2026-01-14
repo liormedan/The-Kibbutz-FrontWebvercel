@@ -1,0 +1,8 @@
+/* Globals */
+/* Radix UI Themes handles most resets, but we can add specific global overrides here if needed. */
+
+body {
+  margin: 0;
+  padding: 0;
+  /* Radix UI handles font-family via the Theme component default, or we can enforce it here if needed. */
+}
