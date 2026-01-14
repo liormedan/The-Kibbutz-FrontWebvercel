@@ -3,33 +3,43 @@
 import { Box, Card, Flex, Text, Avatar, Button, ScrollArea, IconButton } from "@radix-ui/themes";
 import { HomeIcon, ChatBubbleIcon, PersonIcon, GearIcon, PlusIcon } from "@radix-ui/react-icons";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export const NavigationSidebar = () => {
+    const pathname = usePathname();
+
     const navItems = [
-        { label: "פיד", icon: <HomeIcon width="18" height="18" /> },
-        { label: "צ'אטים", icon: <ChatBubbleIcon width="18" height="18" /> },
-        { label: "חברים", icon: <PersonIcon width="18" height="18" /> },
-        { label: "הגדרות", icon: <GearIcon width="18" height="18" /> },
+        { label: "פיד", icon: <HomeIcon width="18" height="18" />, path: "/" },
+        { label: "צ'אטים", icon: <ChatBubbleIcon width="18" height="18" />, path: "/chat" },
+        { label: "חברים", icon: <PersonIcon width="18" height="18" />, path: "/friends" },
+        { label: "הגדרות", icon: <GearIcon width="18" height="18" />, path: "/settings" },
     ];
 
     return (
         <Card size="2">
             <Flex direction="column" gap="1">
-                {navItems.map((item) => (
-                    <Button
-                        key={item.label}
-                        variant="ghost"
-                        color="gray"
-                        style={{
-                            justifyContent: "flex-start",
-                            height: "44px",
-                            color: 'var(--gray-11)',
-                            fontSize: '15px'
-                        }}
-                    >
-                        <Box ml="2">{item.icon}</Box>
-                        {item.label}
-                    </Button>
-                ))}
+                {navItems.map((item) => {
+                    const isActive = pathname === item.path;
+                    return (
+                        <Link key={item.label} href={item.path} style={{ textDecoration: 'none' }}>
+                            <Button
+                                variant={isActive ? "soft" : "ghost"}
+                                color={isActive ? "indigo" : "gray"}
+                                style={{
+                                    justifyContent: "flex-start",
+                                    height: "44px",
+                                    width: "100%",
+                                    color: isActive ? 'var(--accent-11)' : 'var(--gray-11)',
+                                    fontSize: '15px'
+                                }}
+                            >
+                                <Box ml="2">{item.icon}</Box>
+                                {item.label}
+                            </Button>
+                        </Link>
+                    );
+                })}
             </Flex>
         </Card>
     );
