@@ -9,10 +9,10 @@ import { GearIcon, Share1Icon } from "@radix-ui/react-icons";
 export default function ProfilePage() {
     return (
         <AppLayout
-            navigation={<NavigationSidebar />}
-            widgets={<WidgetsSidebar />}
+            navigation={null}
+            widgets={null}
         >
-            <Flex direction="column" gap="4">
+            <Flex direction="column" gap="4" style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
                 {/* Profile Header Card */}
                 <Card size="2" style={{ position: 'relative', overflow: 'hidden' }}>
                     {/* Cover Image */}
@@ -62,7 +62,7 @@ export default function ProfilePage() {
 
                 {/* content Tabs */}
                 <Tabs.Root defaultValue="posts">
-                    <Tabs.List>
+                    <Tabs.List justify="center">
                         <Tabs.Trigger value="posts">פוסטים</Tabs.Trigger>
                         <Tabs.Trigger value="media">מדיה</Tabs.Trigger>
                         <Tabs.Trigger value="about">אודות</Tabs.Trigger>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 
 import { MagnifyingGlassIcon, BellIcon, PersonIcon, HomeIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
+import { NotificationsPopover } from "./NotificationsPopover";
 
 export const Header = () => (
     <Box
@@ -20,10 +21,27 @@ export const Header = () => (
     >
         <Container size="4">
             <Flex justify="between" align="center">
-                {/* Right: Logo */}
-                <Box>
-                    <Text size="5" weight="bold" style={{ color: 'var(--accent-9)' }}>הקיבוץ</Text>
-                </Box>
+                {/* Right: Logo & Icons */}
+                <Flex align="center" gap="5">
+                    <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Text size="5" weight="bold" style={{ color: 'var(--accent-9)', cursor: 'pointer' }}>הקיבוץ</Text>
+                    </Link>
+
+                    {/* Navigation Icons */}
+                    <Flex gap="4" align="center">
+                        <Link href="/">
+                            <IconButton variant="ghost" color="gray" style={{ color: 'var(--gray-12)' }}>
+                                <HomeIcon width="22" height="22" />
+                            </IconButton>
+                        </Link>
+
+                        <Link href="/chat">
+                            <IconButton variant="ghost" color="gray" style={{ color: 'var(--gray-12)' }}>
+                                <ChatBubbleIcon width="22" height="22" />
+                            </IconButton>
+                        </Link>
+                    </Flex>
+                </Flex>
 
                 {/* Center: Search */}
                 <Box style={{ width: '400px' }}>
@@ -34,21 +52,10 @@ export const Header = () => (
                     </TextField.Root>
                 </Box>
 
-                {/* Left: Icons & Profile */}
-                <Flex gap="4" align="center">
-                    <Link href="/">
-                        <IconButton variant="ghost" color="gray">
-                            <HomeIcon width="18" height="18" />
-                        </IconButton>
-                    </Link>
-                    <Link href="/chat">
-                        <IconButton variant="ghost" color="gray">
-                            <ChatBubbleIcon width="18" height="18" />
-                        </IconButton>
-                    </Link>
-                    <IconButton variant="ghost" color="gray">
-                        <BellIcon width="18" height="18" />
-                    </IconButton>
+                {/* Left: Profile & Notifications */}
+                <Flex gap="3" align="center">
+                    <NotificationsPopover />
+
                     <Link href="/profile">
                         <Avatar
                             size="2"
@@ -76,16 +83,25 @@ export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => 
             <Header />
             <Container size="4" mt="4">
                 <Grid
-                    columns={widgets ? "240px 1fr 300px" : "240px 1fr"}
+                    columns={
+                        navigation && widgets ? "240px 1fr 300px" :
+                            navigation ? "240px 1fr" :
+                                widgets ? "1fr 300px" :
+                                    "1fr"
+                    }
                     gap="4"
-                    align="start" // Ensure alignment doesn't stretch weirdly
+                    align="start"
                 >
-                    <Box position="sticky" style={{ top: '80px', height: 'fit-content' }}>
-                        {navigation}
-                    </Box>
-                    <Box style={{ maxWidth: '100%', minWidth: 0 }}> {/* Prevent overflow */}
+                    {navigation && (
+                        <Box position="sticky" style={{ top: '80px', height: 'fit-content' }}>
+                            {navigation}
+                        </Box>
+                    )}
+
+                    <Box style={{ maxWidth: '100%', minWidth: 0 }}>
                         {children}
                     </Box>
+
                     {widgets && (
                         <Box position="sticky" style={{ top: '80px', height: 'fit-content' }}>
                             {widgets}

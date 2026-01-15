@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Theme>
+        <Theme direction="rtl" appearance="light" accentColor="indigo">
           {children}
         </Theme>
       </body>

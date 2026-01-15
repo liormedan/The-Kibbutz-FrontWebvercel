@@ -4,6 +4,7 @@ import { Box, Flex, Text, Avatar, Button, Card, Grid, TextField, Select } from "
 import { AppLayout } from "../../components/AppLayout";
 import { NavigationSidebar, WidgetsSidebar } from "../../components/Sidebars";
 import { MagnifyingGlassIcon, PersonIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 export default function FriendsPage() {
     const friends = [
@@ -33,15 +34,15 @@ export default function FriendsPage() {
 
                         <Flex gap="3" style={{ flexGrow: 1, justifyContent: 'flex-end' }}>
                             <Box style={{ minWidth: '200px' }}>
-                                <TextField.Root placeholder="חפש חברים...">
+                                <TextField.Root placeholder="חפש חברים..." style={{ textAlign: 'right', direction: 'rtl' }}>
                                     <TextField.Slot side="left">
                                         <MagnifyingGlassIcon />
                                     </TextField.Slot>
                                 </TextField.Root>
                             </Box>
                             <Select.Root defaultValue="all">
-                                <Select.Trigger />
-                                <Select.Content>
+                                <Select.Trigger style={{ direction: 'rtl' }} />
+                                <Select.Content position="popper" style={{ direction: 'rtl' }}>
                                     <Select.Item value="all">הכל</Select.Item>
                                     <Select.Item value="community">חברי קהילה</Select.Item>
                                     <Select.Item value="online">מחוברים כעת</Select.Item>
@@ -54,31 +55,54 @@ export default function FriendsPage() {
                 {/* Friends Grid */}
                 <Grid columns={{ initial: "1", sm: "2", md: "3" }} gap="3">
                     {friends.map((friend, i) => (
-                        <Card key={i}>
-                            <Flex gap="3" align="center">
-                                <Avatar
-                                    fallback={friend.name[0]}
-                                    size="4"
-                                    radius="full"
-                                    color="indigo"
-                                />
-                                <Box style={{ flexGrow: 1 }}>
-                                    <Text weight="bold" as="div">{friend.name}</Text>
-                                    <Text size="1" color="gray" as="div">{friend.role}</Text>
-                                    <Flex gap="1" align="center" mt="1">
-                                        <PersonIcon width="12" height="12" color="var(--gray-9)" />
-                                        <Text size="1" color="gray">{friend.mutual} חברים משותפים</Text>
-                                    </Flex>
-                                </Box>
-                            </Flex>
-                            <Flex gap="2" mt="3">
-                                <Button variant="solid" style={{ flexGrow: 1 }}>הוסף חבר</Button>
-                                <Button variant="soft" style={{ flexGrow: 1 }}>הודעה</Button>
-                            </Flex>
-                        </Card>
+                        <FriendCard key={i} friend={friend} />
                     ))}
                 </Grid>
             </Flex>
         </AppLayout>
     );
 }
+
+const FriendCard = ({ friend }: { friend: any }) => {
+    const [requestStatus, setRequestStatus] = useState<"none" | "sent" | "muting">("none");
+
+    const handleAddFriend = () => {
+        if (requestStatus === "none") {
+            setRequestStatus("sent");
+        } else {
+            setRequestStatus("none");
+        }
+    };
+
+    return (
+        <Card>
+            <Flex gap="3" align="center">
+                <Avatar
+                    fallback={friend.name[0]}
+                    size="4"
+                    radius="full"
+                    color="indigo"
+                />
+                <Box style={{ flexGrow: 1 }}>
+                    <Text weight="bold" as="div">{friend.name}</Text>
+                    <Text size="1" color="gray" as="div">{friend.role}</Text>
+                    <Flex gap="1" align="center" mt="1">
+                        <PersonIcon width="12" height="12" color="var(--gray-9)" />
+                        <Text size="1" color="gray">{friend.mutual} חברים משותפים</Text>
+                    </Flex>
+                </Box>
+            </Flex>
+            <Flex gap="2" mt="3">
+                <Button
+                    variant={requestStatus === "sent" ? "outline" : "solid"}
+                    color={requestStatus === "sent" ? "green" : "indigo"}
+                    style={{ flexGrow: 1, cursor: 'pointer' }}
+                    onClick={handleAddFriend}
+                >
+                    {requestStatus === "sent" ? "בקשה נשלחה ✓" : "הוסף חבר"}
+                </Button>
+                <Button variant="soft" style={{ flexGrow: 1, cursor: 'pointer' }}>הודעה</Button>
+            </Flex>
+        </Card>
+    );
+};

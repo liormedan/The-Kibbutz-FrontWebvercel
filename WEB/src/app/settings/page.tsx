@@ -60,19 +60,19 @@ export default function SettingsPage() {
 
                                 <Box>
                                     <Text size="2" mb="1" weight="bold" as="div">שם מלא</Text>
-                                    <TextField.Root placeholder="השם שלך" defaultValue="ג'יין דו" />
+                                    <TextField.Root placeholder="השם שלך" defaultValue="ג'יין דו" style={{ textAlign: 'right', direction: 'rtl' }} />
                                 </Box>
 
                                 <Box>
                                     <Text size="2" mb="1" weight="bold" as="div">אימייל</Text>
-                                    <TextField.Root placeholder="email@example.com" defaultValue="jane@kibbutz.co.il" />
+                                    <TextField.Root placeholder="email@example.com" defaultValue="jane@kibbutz.co.il" style={{ textAlign: 'right', direction: 'rtl' }} />
                                 </Box>
 
                                 <Box>
                                     <Text size="2" mb="1" weight="bold" as="div">תפקיד בקיבוץ</Text>
                                     <Select.Root defaultValue="member">
-                                        <Select.Trigger />
-                                        <Select.Content>
+                                        <Select.Trigger style={{ direction: 'rtl' }} />
+                                        <Select.Content position="popper" style={{ direction: 'rtl' }}>
                                             <Select.Item value="member">חבר קהילה</Select.Item>
                                             <Select.Item value="resident">תושב</Select.Item>
                                             <Select.Item value="guest">אורח</Select.Item>

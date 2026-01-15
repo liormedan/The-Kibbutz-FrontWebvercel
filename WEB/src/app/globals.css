@@ -6,3 +6,21 @@ body {
   padding: 0;
   /* Radix UI handles font-family via the Theme component default, or we can enforce it here if needed. */
 }
+
+html {
+  scrollbar-gutter: stable;
+  /* Reserves space for scrollbar to prevent layout shift */
+}
+
+/* Override Radix Card Border to be Blue/Accent */
+.rt-Card {
+  border: 1px solid var(--accent-9) !important;
+  /* Force border color */
+  box-shadow: 0 2px 10px var(--black-a2);
+  /* Optional: nice shadow */
+}
+
+.rt-Card::after {
+  /* Radix uses ::after for the border usually, let's play safe */
+  border-color: var(--accent-9) !important;
+}

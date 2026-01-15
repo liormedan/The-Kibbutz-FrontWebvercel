@@ -1,7 +1,9 @@
 "use client";
 
-import { Box, Card, Flex, Text, Avatar, TextArea, IconButton, Separator } from "@radix-ui/themes";
-import { ImageIcon, FaceIcon, PaperPlaneIcon, HeartIcon, ChatBubbleIcon, Share1Icon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
+
+import { Box, Card, Flex, Text, Avatar, TextArea, IconButton, Separator, Button } from "@radix-ui/themes";
+import { ImageIcon, FaceIcon, PaperPlaneIcon, HeartIcon, ChatBubbleIcon, Share1Icon, DotsHorizontalIcon, HeartFilledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
 export const FeedComposer = () => {
@@ -29,14 +31,21 @@ export const FeedComposer = () => {
     );
 };
 
-const ButtonIconText = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
-    <Flex gap="1" align="center" style={{ cursor: 'pointer', color: 'var(--gray-10)' }}>
-        {icon}
-        <Text size="2">{label}</Text>
-    </Flex>
-);
+
 
 export const PostCard = () => {
+    const [isLiked, setIsLiked] = useState(false);
+    const [likesCount, setLikesCount] = useState(24);
+
+    const handleLike = () => {
+        if (isLiked) {
+            setLikesCount(prev => prev - 1);
+        } else {
+            setLikesCount(prev => prev + 1);
+        }
+        setIsLiked(!isLiked);
+    };
+
     return (
         <Card size="1" style={{ overflow: 'hidden' }}>
             {/* Header */}
@@ -72,16 +81,35 @@ export const PostCard = () => {
             {/* Footer */}
             <Box p="3">
                 <Flex justify="between" mb="3">
-                    <Text size="1" color="gray">24 לייקים</Text>
+                    <Text size="1" color="gray">{likesCount} לייקים</Text>
                     <Text size="1" color="gray">5 תגובות</Text>
                 </Flex>
                 <Separator size="4" />
                 <Flex justify="between" pt="2">
-                    <ButtonIconText icon={<HeartIcon />} label="לייק" />
-                    <ButtonIconText icon={<ChatBubbleIcon />} label="תגובה" />
-                    <ButtonIconText icon={<Share1Icon />} label="שתף" />
+                    <ButtonIconText
+                        icon={isLiked ? <HeartFilledIcon color="var(--red-9)" width="18" height="18" /> : <HeartIcon width="18" height="18" />}
+                        label="לייק"
+                        onClick={handleLike}
+                        isActive={isLiked}
+                    />
+                    <ButtonIconText icon={<ChatBubbleIcon width="18" height="18" />} label="תגובה" />
+                    <ButtonIconText icon={<Share1Icon width="18" height="18" />} label="שתף" />
                 </Flex>
             </Box>
         </Card>
     );
 };
+
+const ButtonIconText = ({ icon, label, onClick, isActive }: { icon: React.ReactNode, label: string, onClick?: () => void, isActive?: boolean }) => (
+    <Button
+        variant="ghost"
+        color={isActive ? "red" : "gray"}
+        style={{ cursor: 'pointer', flexGrow: 1, height: 'auto', padding: '8px' }}
+        onClick={onClick}
+    >
+        <Flex gap="2" align="center">
+            {icon}
+            <Text size="2">{label}</Text>
+        </Flex>
+    </Button>
+);

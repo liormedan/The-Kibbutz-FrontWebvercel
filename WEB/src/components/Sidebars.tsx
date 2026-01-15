@@ -24,18 +24,21 @@ export const NavigationSidebar = () => {
                     return (
                         <Link key={item.label} href={item.path} style={{ textDecoration: 'none' }}>
                             <Button
-                                variant={isActive ? "soft" : "ghost"}
-                                color={isActive ? "indigo" : "gray"}
+                                variant="ghost" // Always ghost to prevent layout shift
                                 style={{
                                     justifyContent: "flex-start",
                                     height: "44px",
                                     width: "100%",
                                     color: isActive ? 'var(--accent-11)' : 'var(--gray-11)',
-                                    fontSize: '15px'
+                                    backgroundColor: isActive ? 'var(--accent-3)' : 'transparent', // Manual background
+                                    fontSize: '15px',
+                                    border: '1px solid transparent',
+                                    paddingRight: '12px',
+                                    boxSizing: 'border-box'
                                 }}
                             >
                                 <Box ml="2">{item.icon}</Box>
-                                {item.label}
+                                <Text>{item.label}</Text>
                             </Button>
                         </Link>
                     );
