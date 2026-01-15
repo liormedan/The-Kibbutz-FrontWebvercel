@@ -2,7 +2,7 @@
 
 import { Box, Flex, Text, Avatar, Button, Tabs, Card, Grid } from "@radix-ui/themes";
 import { AppLayout } from "../../components/AppLayout";
-import { NavigationSidebar, WidgetsSidebar } from "../../components/Sidebars";
+import { NavigationSidebar } from "../../components/MainMenuRight";
 import { PostCard } from "../../components/Feed";
 import { GearIcon, Share1Icon } from "@radix-ui/react-icons";
 

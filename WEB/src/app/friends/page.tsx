@@ -2,7 +2,7 @@
 
 import { Box, Flex, Text, Avatar, Button, Card, Grid, TextField, Select } from "@radix-ui/themes";
 import { AppLayout } from "../../components/AppLayout";
-import { NavigationSidebar, WidgetsSidebar } from "../../components/Sidebars";
+import { NavigationSidebar } from "../../components/MainMenuRight";
 import { MagnifyingGlassIcon, PersonIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
@@ -21,7 +21,7 @@ export default function FriendsPage() {
     return (
         <AppLayout
             navigation={<NavigationSidebar />}
-            widgets={<WidgetsSidebar />}
+            widgets={null}
         >
             <Flex direction="column" gap="4">
                 {/* Header & Search */}

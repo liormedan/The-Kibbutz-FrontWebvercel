@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container, Grid, Flex, TextField, IconButton, Avatar, Text } from "@radix-ui/themes";
+import { Box, Container, Grid, Flex, TextField, IconButton, Avatar, Text, Card, DropdownMenu } from "@radix-ui/themes";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -56,15 +56,41 @@ export const Header = () => (
                 <Flex gap="3" align="center">
                     <NotificationsPopover />
 
-                    <Link href="/profile">
-                        <Avatar
-                            size="2"
-                            src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
-                            fallback="JD"
-                            radius="full"
-                            style={{ cursor: 'pointer' }}
-                        />
-                    </Link>
+                    <DropdownMenu.Root>
+                        <DropdownMenu.Trigger>
+                            <Avatar
+                                size="2"
+                                src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
+                                fallback="JD"
+                                radius="full"
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </DropdownMenu.Trigger>
+                        <DropdownMenu.Content align="end">
+                            <DropdownMenu.Item>
+                                <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                    הפרופיל שלי
+                                </Link>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item>
+                                <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                    הגדרות
+                                </Link>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Separator />
+                            <DropdownMenu.Item color="gray">
+                                <Link href="/help" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                    מרכז עזרה
+                                </Link>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Separator />
+                            <DropdownMenu.Item color="red">
+                                <Link href="/login" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                    התנתק
+                                </Link>
+                            </DropdownMenu.Item>
+                        </DropdownMenu.Content>
+                    </DropdownMenu.Root>
                 </Flex>
             </Flex>
         </Container>
@@ -93,17 +119,17 @@ export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => 
                     align="start"
                 >
                     {navigation && (
-                        <Box position="sticky" style={{ top: '80px', height: 'fit-content' }}>
+                        <Box>
                             {navigation}
                         </Box>
                     )}
 
-                    <Box style={{ maxWidth: '100%', minWidth: 0 }}>
+                    <Card size="3" style={{ height: 'calc(100vh - 100px)', overflowY: 'auto', padding: '0' }}>
                         {children}
-                    </Box>
+                    </Card>
 
                     {widgets && (
-                        <Box position="sticky" style={{ top: '80px', height: 'fit-content' }}>
+                        <Box>
                             {widgets}
                         </Box>
                     )}

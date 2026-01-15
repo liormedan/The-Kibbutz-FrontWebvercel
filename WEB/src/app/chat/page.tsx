@@ -1,9 +1,12 @@
 "use client";
 
-import { Box, Flex, Text, Avatar, TextField, ScrollArea, Card, IconButton, Separator } from "@radix-ui/themes";
+import { Box, Flex, Text, Avatar, TextField, ScrollArea, Card, IconButton, Separator, DropdownMenu } from "@radix-ui/themes";
 import { AppLayout } from "../../components/AppLayout";
-import { NavigationSidebar } from "../../components/Sidebars";
+import { NavigationSidebar } from "../../components/MainMenuRight";
 import { MagnifyingGlassIcon, PaperPlaneIcon, DotsHorizontalIcon, FaceIcon, ImageIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
+
+import { useState } from "react";
 
 // Mock Data
 const conversations = [
@@ -22,10 +25,38 @@ const messages = [
 ];
 
 export default function ChatPage() {
+    const [activeChatId, setActiveChatId] = useState(1);
+    const [messageInput, setMessageInput] = useState("");
+    const [chatMessages, setChatMessages] = useState(messages);
+
+    const handleSendMessage = () => {
+        if (!messageInput.trim()) return;
+        const newMsg = {
+            id: Date.now(),
+            sender: "me",
+            text: messageInput,
+            time: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
+        };
+        setChatMessages([...chatMessages, newMsg]);
+        setMessageInput("");
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') handleSendMessage();
+    };
+
+    const handleDeleteChat = () => {
+        const updatedConversations = conversations.filter(c => c.id !== activeChatId);
+        // Note: In a real app we would update the state, but 'conversations' is a const outside component. 
+        // For this demo, we'd need to move 'conversations' into state or just alert.
+        // Let's assume we just navigate away or alert for now since moving const to state requires bigger refactor.
+        alert("השיחה נמחקה (בהדגמה)");
+    };
+
     return (
         <AppLayout
             navigation={<NavigationSidebar />}
-            widgets={null} // No widgets on chat page to give more space
+            widgets={null}
         >
             <Card size="2" style={{ height: 'calc(100vh - 120px)', padding: 0, overflow: 'hidden' }}>
                 <Flex style={{ height: '100%' }}>
@@ -43,18 +74,21 @@ export default function ChatPage() {
                                 {conversations.map((chat) => (
                                     <Box
                                         key={chat.id}
+                                        onClick={() => setActiveChatId(chat.id)}
                                         p="3"
                                         style={{
                                             cursor: 'pointer',
-                                            background: chat.id === 1 ? 'var(--accent-a3)' : 'transparent',
-                                            borderBottom: '1px solid var(--gray-alpha-3)'
+                                            background: activeChatId === chat.id ? 'var(--accent-3)' : 'transparent',
+                                            borderBottom: '1px solid var(--gray-alpha-3)',
+                                            transition: 'background 0.2s'
                                         }}
+                                        className="hover:bg-gray-100"
                                     >
                                         <Flex gap="3" align="center">
-                                            <Avatar fallback={chat.name[0]} radius="full" size="3" />
+                                            <Avatar fallback={chat.name[0]} radius="full" size="3" color={activeChatId === chat.id ? "indigo" : "gray"} />
                                             <Box style={{ flexGrow: 1, overflow: 'hidden' }}>
                                                 <Flex justify="between">
-                                                    <Text weight="bold" size="2">{chat.name}</Text>
+                                                    <Text weight={activeChatId === chat.id ? "bold" : "regular"} size="2">{chat.name}</Text>
                                                     <Text size="1" color="gray">{chat.time}</Text>
                                                 </Flex>
                                                 <Flex justify="between" mt="1">
@@ -80,19 +114,50 @@ export default function ChatPage() {
                         {/* Chat Header */}
                         <Flex justify="between" align="center" p="3" style={{ borderBottom: '1px solid var(--gray-alpha-5)', background: 'var(--color-background)' }}>
                             <Flex gap="3" align="center">
-                                <Avatar fallback="שכ" size="2" radius="full" color="teal" />
+                                <Avatar
+                                    fallback={conversations.find(c => c.id === activeChatId)?.name[0] || "?"}
+                                    size="2"
+                                    radius="full"
+                                    color="teal"
+                                />
                                 <Box>
-                                    <Text weight="bold" size="2" as="div">שרה כהן</Text>
+                                    <Text weight="bold" size="2" as="div">{conversations.find(c => c.id === activeChatId)?.name}</Text>
                                     <Text size="1" color="green" as="div">מחובר/ת כעת</Text>
                                 </Box>
                             </Flex>
-                            <IconButton variant="ghost" color="gray"><DotsHorizontalIcon /></IconButton>
+                            <DropdownMenu.Root>
+                                <DropdownMenu.Trigger>
+                                    <IconButton variant="ghost" color="gray"><DotsHorizontalIcon /></IconButton>
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Content align="start">
+                                    <DropdownMenu.Item>
+                                        <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                            צפה בפרופיל
+                                        </Link>
+                                    </DropdownMenu.Item>
+                                    <DropdownMenu.Item>
+                                        <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                            הגדרות התראות
+                                        </Link>
+                                    </DropdownMenu.Item>
+                                    <DropdownMenu.Separator />
+                                    <DropdownMenu.Item color="red">
+                                        <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                            חסום משתמש (הגדרות)
+                                        </Link>
+                                    </DropdownMenu.Item>
+                                    <DropdownMenu.Item color="red" onClick={handleDeleteChat}>
+                                        מחק שיחה
+                                    </DropdownMenu.Item>
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Root>
                         </Flex>
 
                         {/* Messages Area */}
                         <ScrollArea type="always" scrollbars="vertical" style={{ flexGrow: 1, background: 'var(--gray-1)' }}>
                             <Flex direction="column" gap="3" p="4" style={{ minHeight: '100%' }}>
-                                {messages.map((msg) => (
+                                <Text align="center" size="1" color="gray" my="2">היום</Text>
+                                {chatMessages.map((msg) => (
                                     <Flex key={msg.id} justify={msg.sender === 'me' ? 'start' : 'end'}>
                                         <Box
                                             style={{
@@ -104,12 +169,15 @@ export default function ChatPage() {
                                                 border: msg.sender === 'other' ? '1px solid var(--gray-4)' : 'none',
                                                 borderBottomRightRadius: msg.sender === 'me' ? '4px' : '16px',
                                                 borderBottomLeftRadius: msg.sender === 'other' ? '4px' : '16px',
-                                                // Ensure text wrap
-                                                wordBreak: 'break-word'
+                                                boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                                                wordBreak: 'break-word',
+                                                animation: 'fadeIn 0.2s ease-in-out' // optional animation class if available globally or inline
                                             }}
                                         >
                                             <Text size="2">{msg.text}</Text>
-                                            <Text size="1" style={{ display: 'block', marginTop: '4px', opacity: 0.7, textAlign: 'end', fontSize: '10px' }}>{msg.time}</Text>
+                                            <Flex justify="end" mt="1">
+                                                <Text size="1" style={{ opacity: 0.7, fontSize: '10px' }}>{msg.time}</Text>
+                                            </Flex>
                                         </Box>
                                     </Flex>
                                 ))}
@@ -121,9 +189,18 @@ export default function ChatPage() {
                             <Flex gap="2">
                                 <IconButton variant="ghost" color="gray"><ImageIcon /></IconButton>
                                 <IconButton variant="ghost" color="gray"><FaceIcon /></IconButton>
-                                <TextField.Root placeholder="כתוב הודעה..." style={{ flexGrow: 1 }} size="3">
+                                <TextField.Root
+                                    placeholder="כתוב הודעה..."
+                                    style={{ flexGrow: 1 }}
+                                    size="3"
+                                    value={messageInput}
+                                    onChange={(e) => setMessageInput(e.target.value)}
+                                    onKeyDown={handleKeyDown}
+                                >
                                 </TextField.Root>
-                                <IconButton variant="solid" size="3"><PaperPlaneIcon /></IconButton>
+                                <IconButton variant="solid" size="3" onClick={handleSendMessage}>
+                                    <PaperPlaneIcon />
+                                </IconButton>
                             </Flex>
                         </Box>
                     </Flex>
