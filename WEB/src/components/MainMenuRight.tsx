@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Card, Flex, Text, Button } from "@radix-ui/themes";
+import { Card, Flex, Text, Button } from "@radix-ui/themes";
 import { HomeIcon, ChatBubbleIcon, PersonIcon, GearIcon, BellIcon, BackpackIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,11 +34,11 @@ export const NavigationSidebar = () => {
                                     backgroundColor: isActive ? 'var(--accent-3)' : 'transparent', // Manual background
                                     fontSize: '15px',
                                     border: '1px solid transparent',
-                                    paddingRight: '12px',
+                                    paddingInline: '12px',
                                     boxSizing: 'border-box'
                                 }}
                             >
-                                <Box ml="2">{item.icon}</Box>
+                                {item.icon}
                                 <Text weight="bold">{item.label}</Text>
                             </Button>
                         </Link>
