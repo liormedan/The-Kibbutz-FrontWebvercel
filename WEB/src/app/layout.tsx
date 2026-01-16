@@ -28,7 +28,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          body[data-scroll-locked], body[style*="overflow: hidden"] {
+            overflow-y: scroll !important;
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+          }
+        `}} />
         <ThemeProvider>
           <AppLayout navigation={<NavigationSidebar />}>
             {children}

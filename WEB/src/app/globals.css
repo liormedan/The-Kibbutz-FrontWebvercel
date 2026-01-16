@@ -5,11 +5,25 @@ body {
   margin: 0;
   padding: 0;
   /* Radix UI handles font-family via the Theme component default, or we can enforce it here if needed. */
+  overflow-y: scroll;
+}
+
+/* Prevent Radix UI from shifting layout when opening dialogs */
+body[data-scroll-locked],
+body[style*="overflow: hidden"] {
+  /* Force scrollbar to stay visible to prevent layout shift */
+  overflow-y: scroll !important;
+  /* Remove any compensation padding Radix might try to add */
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
 html {
   overflow-y: scroll;
   /* Forces scrollbar to always be visible to prevent layout shift */
+  scrollbar-gutter: stable;
 }
 
 /* Override Radix Card Border to be Blue/Accent */
