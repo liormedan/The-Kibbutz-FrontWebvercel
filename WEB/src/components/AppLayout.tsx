@@ -34,16 +34,24 @@ export const Header = () => (
                     </Link>
 
                     {/* Navigation Icons */}
-                    <Flex gap="4" align="center">
+                    <Flex gap="5" align="center">
                         <Link href="/">
-                            <IconButton variant="ghost" color="gray" style={{ color: 'var(--gray-12)' }}>
-                                <HomeIcon width="22" height="22" />
+                            <IconButton
+                                variant="ghost"
+                                color="gray"
+                                style={{ color: 'var(--gray-12)', width: '36px', height: '36px' }}
+                            >
+                                <HomeIcon width="24" height="24" />
                             </IconButton>
                         </Link>
 
                         <Link href="/chat">
-                            <IconButton variant="ghost" color="gray" style={{ color: 'var(--gray-12)' }}>
-                                <ChatBubbleIcon width="22" height="22" />
+                            <IconButton
+                                variant="ghost"
+                                color="gray"
+                                style={{ color: 'var(--gray-12)', width: '36px', height: '36px' }}
+                            >
+                                <ChatBubbleIcon width="24" height="24" />
                             </IconButton>
                         </Link>
                     </Flex>
@@ -59,7 +67,7 @@ export const Header = () => (
                 </Box>
 
                 {/* Left: Profile & Notifications */}
-                <Flex gap="3" align="center">
+                <Flex gap="4" align="center">
                     <ThemeToggle showLabel={false} />
                     <NotificationsPopover />
 

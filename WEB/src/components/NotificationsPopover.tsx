@@ -15,8 +15,8 @@ export const NotificationsPopover = () => {
     return (
         <Popover.Root>
             <Popover.Trigger asChild>
-                <Button variant="ghost" color="gray" style={{ padding: 0, width: '32px', height: '32px', color: 'var(--gray-12)' }}>
-                    <BellIcon width="22" height="22" />
+                <Button variant="ghost" color="gray" style={{ padding: 0, width: '36px', height: '36px', color: 'var(--gray-12)' }}>
+                    <BellIcon width="24" height="24" />
                 </Button>
             </Popover.Trigger>
             <Popover.Content width="300px" style={{ padding: 0, direction: 'rtl' }}>

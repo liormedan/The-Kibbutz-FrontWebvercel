@@ -16,7 +16,7 @@ export const ThemeToggle = ({ showLabel = true }: { showLabel?: boolean }) => {
     }
 
     const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-    const icon = theme === 'dark' ? <SunIcon width="16" height="16" /> : <MoonIcon width="16" height="16" />;
+    const icon = theme === 'dark' ? <SunIcon width="20" height="20" /> : <MoonIcon width="20" height="20" />;
 
     if (!showLabel) {
         return (
@@ -24,7 +24,7 @@ export const ThemeToggle = ({ showLabel = true }: { showLabel?: boolean }) => {
                 variant="ghost"
                 color="gray"
                 onClick={toggleTheme}
-                style={{ color: 'var(--gray-12)' }}
+                style={{ color: 'var(--gray-12)', width: '36px', height: '36px' }}
             >
                 {icon}
             </IconButton>

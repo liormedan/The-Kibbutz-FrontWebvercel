@@ -95,8 +95,6 @@ export const NavigationSidebar = () => {
                     <Text size="1" color="gray" style={{ cursor: 'pointer' }}>מדיניות העוגיות</Text>
                 </Flex>
 
-
->>>>>>> Stashed changes
             </Flex>
 
         </Flex>
