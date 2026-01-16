@@ -56,11 +56,11 @@ export default function ChatPage() {
             <Flex style={{ height: '100%' }}>
 
                 {/* Right Pane: Chat List */}
-                <Box style={{ width: '300px', borderLeft: '1px solid var(--gray-alpha-5)', background: 'var(--gray-2)' }}>
+                <Box style={{ width: '300px', borderLeft: '1px solid var(--gray-alpha-5)', background: 'var(--gray-2)', direction: 'rtl', textAlign: 'right' }}>
                     <Box p="3">
                         <Text size="4" weight="bold" mb="3" as="div">הודעות</Text>
                         <TextField.Root placeholder="חפש שיחה...">
-                            <TextField.Slot side="left"><MagnifyingGlassIcon /></TextField.Slot>
+                            <TextField.Slot side="right"><MagnifyingGlassIcon /></TextField.Slot>
                         </TextField.Root>
                     </Box>
                     <ScrollArea type="auto" scrollbars="vertical" style={{ height: 'calc(100% - 80px)' }}>
@@ -78,14 +78,14 @@ export default function ChatPage() {
                                     }}
                                     className="hover:bg-gray-100"
                                 >
-                                    <Flex gap="3" align="center">
+                                    <Flex gap="3" align="center" style={{ flexDirection: 'row-reverse' }}>
                                         <Avatar fallback={chat.name[0]} radius="full" size="3" color={activeChatId === chat.id ? "indigo" : "gray"} />
                                         <Box style={{ flexGrow: 1, overflow: 'hidden' }}>
-                                            <Flex justify="between">
+                                            <Flex justify="between" style={{ flexDirection: 'row-reverse' }}>
                                                 <Text weight={activeChatId === chat.id ? "bold" : "regular"} size="2">{chat.name}</Text>
                                                 <Text size="1" color="gray">{chat.time}</Text>
                                             </Flex>
-                                            <Flex justify="between" mt="1">
+                                            <Flex justify="between" mt="1" style={{ flexDirection: 'row-reverse' }}>
                                                 <Text size="1" color="gray" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>
                                                     {chat.lastMessage}
                                                 </Text>
@@ -104,10 +104,10 @@ export default function ChatPage() {
                 </Box>
 
                 {/* Left Pane: Active Chat */}
-                <Flex direction="column" style={{ flexGrow: 1, position: 'relative' }}>
+                <Flex direction="column" style={{ flexGrow: 1, position: 'relative', direction: 'rtl', textAlign: 'right' }}>
                     {/* Chat Header */}
                     <Flex justify="between" align="center" p="3" style={{ borderBottom: '1px solid var(--gray-alpha-5)', background: 'var(--color-background)' }}>
-                        <Flex gap="3" align="center">
+                        <Flex gap="3" align="center" style={{ flexDirection: 'row-reverse' }}>
                             <Avatar
                                 fallback={conversations.find(c => c.id === activeChatId)?.name[0] || "?"}
                                 size="2"
@@ -123,7 +123,7 @@ export default function ChatPage() {
                             <DropdownMenu.Trigger>
                                 <IconButton variant="ghost" color="gray"><DotsHorizontalIcon /></IconButton>
                             </DropdownMenu.Trigger>
-                            <DropdownMenu.Content align="start">
+                        <DropdownMenu.Content align="end">
                                 <DropdownMenu.Item>
                                     <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
                                         צפה בפרופיל
@@ -148,7 +148,7 @@ export default function ChatPage() {
                     </Flex>
 
                     {/* Messages Area */}
-                    <ScrollArea type="always" scrollbars="vertical" style={{ flexGrow: 1, background: 'var(--gray-1)' }}>
+                    <ScrollArea type="always" scrollbars="vertical" style={{ flexGrow: 1, background: 'var(--gray-1)', direction: 'rtl' }}>
                         <Flex direction="column" gap="3" p="4" style={{ minHeight: '100%' }}>
                             <Text align="center" size="1" color="gray" my="2">היום</Text>
                             {chatMessages.map((msg) => (
