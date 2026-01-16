@@ -1,9 +1,10 @@
 "use client";
 
-import { Box, Card, Flex, Text, Button, Avatar } from "@radix-ui/themes";
+import { Box, Card, Flex, Text, Button } from "@radix-ui/themes";
 import { HomeIcon, ChatBubbleIcon, PersonIcon, GearIcon, BackpackIcon, ExitIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ProfileCard } from "./ProfileCard";
 
 export const NavigationSidebar = () => {
     const pathname = usePathname();
@@ -20,26 +21,7 @@ export const NavigationSidebar = () => {
         <Flex direction="column" gap="4" style={{ width: '100%' }}>
 
             {/* 1. Profile Card Section */}
-            <Card size="2" style={{ padding: 0, overflow: 'hidden', position: 'relative' }}>
-                {/* Cover Image */}
-                <Box style={{
-                    height: '80px',
-                    background: 'url(https://images.unsplash.com/photo-1548544149-4835e62ee5b3?w=800&q=80) center/cover no-repeat'
-                }} />
-
-                {/* Profile Info */}
-                <Flex direction="column" align="center" pb="3" style={{ marginTop: '-40px' }}>
-                    <Avatar
-                        size="5"
-                        src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
-                        fallback="תג"
-                        radius="full"
-                        style={{ border: '4px solid white' }}
-                    />
-                    <Text size="3" weight="bold" mt="2">תומר גבריאל</Text>
-                    <Text size="2" color="gray" style={{ direction: 'ltr' }}>@Tomer_Gabriel_1</Text>
-                </Flex>
-            </Card>
+            <ProfileCard />
 
             {/* 2. Navigation Section */}
             <Card size="2" style={{ padding: '8px' }}>
@@ -80,6 +62,12 @@ export const NavigationSidebar = () => {
                 </Flex>
             </Card>
 
+            <Link href="/settings" style={{ textDecoration: 'none' }}>
+                <Button variant="ghost" style={{ width: '100%', justifyContent: 'center' }}>
+                    <Text>הגדרות</Text>
+                </Button>
+            </Link>
+
             {/* 3. Footer / Bottom Actions */}
             <Flex direction="column" gap="2" px="2">
                 <Button variant="ghost" style={{ justifyContent: 'flex-start', color: 'var(--gray-11)' }}>
@@ -100,4 +88,5 @@ export const NavigationSidebar = () => {
         </Flex>
     );
 };
+
 
