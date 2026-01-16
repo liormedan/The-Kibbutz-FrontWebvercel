@@ -2,6 +2,7 @@
 
 import { Box, Flex, Text, Avatar, Popover, Button, ScrollArea } from "@radix-ui/themes";
 import { BellIcon, HeartIcon, ChatBubbleIcon, PersonIcon } from "@radix-ui/react-icons";
+import { NotificationItem } from "./NotificationItem";
 
 const notifications = [
     { id: 1, text: "שרה כהן אהבה את הפוסט שלך", icon: <HeartIcon color="var(--red-9)" />, time: "לפני 5 דק'" },
@@ -19,31 +20,19 @@ export const NotificationsPopover = () => {
                     <BellIcon width="24" height="24" />
                 </Button>
             </Popover.Trigger>
-            <Popover.Content width="300px" style={{ padding: 0, direction: 'rtl' }}>
+            <Popover.Content width="300px" style={{ padding: 0 }} dir="rtl">
                 <Box p="3" style={{ borderBottom: '1px solid var(--gray-alpha-4)' }}>
-                    <Text weight="bold" size="2">התראות</Text>
+                    <Text weight="bold" size="2" align="right">התראות</Text>
                 </Box>
                 <ScrollArea type="auto" style={{ maxHeight: '300px' }}>
                     <Flex direction="column">
                         {notifications.map((notif) => (
-                            <Box
+                            <NotificationItem
                                 key={notif.id}
-                                p="3"
-                                style={{
-                                    borderBottom: '1px solid var(--gray-alpha-3)',
-                                    cursor: 'pointer',
-                                    transition: 'background 0.2s'
-                                }}
-                                className="hover:bg-gray-100" // Simple hover effect
-                            >
-                                <Flex gap="3" align="start">
-                                    <Box pt="1">{notif.icon}</Box>
-                                    <Box>
-                                        <Text size="2" style={{ lineHeight: '1.4' }}>{notif.text}</Text>
-                                        <Text size="1" color="gray" mt="1">{notif.time}</Text>
-                                    </Box>
-                                </Flex>
-                            </Box>
+                                text={notif.text}
+                                time={notif.time}
+                                icon={notif.icon}
+                            />
                         ))}
                     </Flex>
                 </ScrollArea>

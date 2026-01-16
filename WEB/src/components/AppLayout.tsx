@@ -81,26 +81,26 @@ export const Header = () => (
                                 style={{ cursor: 'pointer' }}
                             />
                         </DropdownMenu.Trigger>
-                        <DropdownMenu.Content align="end">
-                            <DropdownMenu.Item>
-                                <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                        <DropdownMenu.Content align="end" dir="rtl">
+                            <DropdownMenu.Item style={{ textAlign: 'right', flexDirection: 'row-reverse' }}>
+                                <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%', textAlign: 'right', display: 'block' }}>
                                     הפרופיל שלי
                                 </Link>
                             </DropdownMenu.Item>
-                            <DropdownMenu.Item>
-                                <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                            <DropdownMenu.Item style={{ textAlign: 'right', flexDirection: 'row-reverse' }}>
+                                <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%', textAlign: 'right', display: 'block' }}>
                                     הגדרות
                                 </Link>
                             </DropdownMenu.Item>
                             <DropdownMenu.Separator />
-                            <DropdownMenu.Item color="gray">
-                                <Link href="/help" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                            <DropdownMenu.Item color="gray" style={{ textAlign: 'right', flexDirection: 'row-reverse' }}>
+                                <Link href="/help" style={{ textDecoration: 'none', color: 'inherit', width: '100%', textAlign: 'right', display: 'block' }}>
                                     מרכז עזרה
                                 </Link>
                             </DropdownMenu.Item>
                             <DropdownMenu.Separator />
-                            <DropdownMenu.Item color="red">
-                                <Link href="/login" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                            <DropdownMenu.Item color="red" style={{ textAlign: 'right', flexDirection: 'row-reverse' }}>
+                                <Link href="/login" style={{ textDecoration: 'none', color: 'inherit', width: '100%', textAlign: 'right', display: 'block' }}>
                                     התנתק
                                 </Link>
                             </DropdownMenu.Item>
