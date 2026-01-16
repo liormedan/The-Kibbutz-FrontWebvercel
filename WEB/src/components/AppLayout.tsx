@@ -44,9 +44,9 @@ export const Header = () => (
                 </Flex>
 
                 {/* Center: Search */}
-                <Box style={{ width: '400px' }}>
+                <Box style={{ width: '100%', maxWidth: '400px' }}>
                     <TextField.Root placeholder="חיפוש..." radius="large">
-                        <TextField.Slot side="left">
+                        <TextField.Slot side="right">
                             <MagnifyingGlassIcon height="16" width="16" />
                         </TextField.Slot>
                     </TextField.Root>
@@ -99,22 +99,23 @@ export const Header = () => (
 
 interface AppLayoutProps {
     children: ReactNode;
-    navigation: ReactNode;
-    widgets: ReactNode;
+    navigation?: ReactNode;
+    widgets?: ReactNode;
 }
 
 export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => {
+    const columns = {
+        initial: "1fr",
+        md: navigation && widgets ? "240px 1fr 300px" : navigation ? "240px 1fr" : widgets ? "1fr 300px" : "1fr",
+        lg: navigation && widgets ? "240px 1fr 300px" : navigation ? "240px 1fr" : widgets ? "1fr 300px" : "1fr",
+    };
+
     return (
         <Box>
             <Header />
             <Container size="4" mt="4">
                 <Grid
-                    columns={
-                        navigation && widgets ? "240px 1fr 300px" :
-                            navigation ? "240px 1fr" :
-                                widgets ? "1fr 300px" :
-                                    "1fr"
-                    }
+                    columns={columns}
                     gap="4"
                     align="start"
                 >
@@ -124,7 +125,7 @@ export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => 
                         </Box>
                     )}
 
-                    <Card size="3" style={{ height: 'calc(100vh - 100px)', overflowY: 'auto', padding: '0' }}>
+                    <Card size="3" style={{ padding: '0' }}>
                         {children}
                     </Card>
 
