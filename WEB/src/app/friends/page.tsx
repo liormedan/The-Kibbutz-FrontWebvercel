@@ -1,8 +1,6 @@
 "use client";
 
 import { Box, Flex, Text, Avatar, Button, Card, Grid, TextField, Select } from "@radix-ui/themes";
-import { AppLayout } from "../../components/AppLayout";
-import { NavigationSidebar } from "../../components/MainMenuRight";
 import { MagnifyingGlassIcon, PersonIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
@@ -19,47 +17,42 @@ export default function FriendsPage() {
     ];
 
     return (
-        <AppLayout
-            navigation={<NavigationSidebar />}
-            widgets={null}
-        >
-            <Flex direction="column" gap="4">
-                {/* Header & Search */}
-                <Card size="2">
-                    <Flex justify="between" align="center" wrap="wrap" gap="3">
-                        <Box>
-                            <Text size="5" weight="bold">חברים וקהילה</Text>
-                            <Text size="2" color="gray" as="div">כל החברים בקיבוץ שלך</Text>
+        <Flex direction="column" gap="4">
+            {/* Header & Search */}
+            <Card size="2">
+                <Flex justify="between" align="center" wrap="wrap" gap="3">
+                    <Box>
+                        <Text size="5" weight="bold">חברים וקהילה</Text>
+                        <Text size="2" color="gray" as="div">כל החברים בקיבוץ שלך</Text>
+                    </Box>
+
+                    <Flex gap="3" style={{ flexGrow: 1, justifyContent: 'flex-end' }}>
+                        <Box style={{ minWidth: '200px' }}>
+                            <TextField.Root placeholder="חפש חברים..." style={{ textAlign: 'right', direction: 'rtl' }}>
+                                <TextField.Slot side="left">
+                                    <MagnifyingGlassIcon />
+                                </TextField.Slot>
+                            </TextField.Root>
                         </Box>
-
-                        <Flex gap="3" style={{ flexGrow: 1, justifyContent: 'flex-end' }}>
-                            <Box style={{ minWidth: '200px' }}>
-                                <TextField.Root placeholder="חפש חברים..." style={{ textAlign: 'right', direction: 'rtl' }}>
-                                    <TextField.Slot side="left">
-                                        <MagnifyingGlassIcon />
-                                    </TextField.Slot>
-                                </TextField.Root>
-                            </Box>
-                            <Select.Root defaultValue="all">
-                                <Select.Trigger style={{ direction: 'rtl' }} />
-                                <Select.Content position="popper" style={{ direction: 'rtl' }}>
-                                    <Select.Item value="all">הכל</Select.Item>
-                                    <Select.Item value="community">חברי קהילה</Select.Item>
-                                    <Select.Item value="online">מחוברים כעת</Select.Item>
-                                </Select.Content>
-                            </Select.Root>
-                        </Flex>
+                        <Select.Root defaultValue="all">
+                            <Select.Trigger style={{ direction: 'rtl' }} />
+                            <Select.Content position="popper" style={{ direction: 'rtl' }}>
+                                <Select.Item value="all">הכל</Select.Item>
+                                <Select.Item value="community">חברי קהילה</Select.Item>
+                                <Select.Item value="online">מחוברים כעת</Select.Item>
+                            </Select.Content>
+                        </Select.Root>
                     </Flex>
-                </Card>
+                </Flex>
+            </Card>
 
-                {/* Friends Grid */}
-                <Grid columns={{ initial: "1", sm: "2", md: "3" }} gap="3">
-                    {friends.map((friend, i) => (
-                        <FriendCard key={i} friend={friend} />
-                    ))}
-                </Grid>
-            </Flex>
-        </AppLayout>
+            {/* Friends Grid */}
+            <Grid columns={{ initial: "1", sm: "2", md: "3" }} gap="3">
+                {friends.map((friend, i) => (
+                    <FriendCard key={i} friend={friend} />
+                ))}
+            </Grid>
+        </Flex>
     );
 }
 

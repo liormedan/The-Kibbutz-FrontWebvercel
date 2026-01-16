@@ -8,8 +8,8 @@ body {
 }
 
 html {
-  scrollbar-gutter: stable;
-  /* Reserves space for scrollbar to prevent layout shift */
+  overflow-y: scroll;
+  /* Forces scrollbar to always be visible to prevent layout shift */
 }
 
 /* Override Radix Card Border to be Blue/Accent */

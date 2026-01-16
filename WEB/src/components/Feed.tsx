@@ -6,6 +6,19 @@ import { Box, Card, Flex, Text, Avatar, TextArea, IconButton, Separator, Button 
 import { ImageIcon, FaceIcon, PaperPlaneIcon, HeartIcon, ChatBubbleIcon, Share1Icon, DotsHorizontalIcon, HeartFilledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
+export const FeedHeader = () => {
+    return (
+        <Flex justify="between" align="center" mb="2">
+            <Text size="6" weight="bold">סוג הפיד</Text>
+            <Flex gap="3">
+                <Button variant="ghost" color="gray" style={{ fontWeight: 'normal' }}>הפופולארים ביותר</Button>
+                <Button variant="ghost" color="gray" style={{ fontWeight: 'normal' }}>חברים</Button>
+                <Button variant="ghost" style={{ fontWeight: 'bold', color: 'black', textDecoration: 'underline', textUnderlineOffset: '4px' }}>האלגוריתם שלנו</Button>
+            </Flex>
+        </Flex>
+    );
+};
+
 export const FeedComposer = () => {
     return (
         <Card size="3">

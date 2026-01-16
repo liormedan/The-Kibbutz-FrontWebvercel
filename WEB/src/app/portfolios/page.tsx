@@ -1,9 +1,7 @@
 "use client";
 
 import { Box, Flex, Text, Card, Heading, Grid, Button, Badge, TextField, Dialog, Tabs, IconButton, Avatar } from "@radix-ui/themes";
-import { AppLayout } from "../../components/AppLayout";
-import { NavigationSidebar } from "../../components/MainMenuRight";
-import { PlusIcon, HeartIcon, HeartFilledIcon, MagnifyingGlassIcon, BackpackIcon } from "@radix-ui/react-icons";
+import { PlusIcon, HeartIcon, HeartFilledIcon, MagnifyingGlassIcon, BackpackIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
 // Mock Data for Portfolios
@@ -64,177 +62,176 @@ export default function PortfoliosPage() {
         : portfolios;
 
     return (
-        <AppLayout
-            navigation={<NavigationSidebar />}
-        >
-            <Flex direction="column" gap="6">
+        <Flex direction="column" gap="6">
 
-                {/* Header Section */}
-                <Flex justify="between" align="center">
-                    <Box>
-                        <Heading size="6" mb="1">תיקי עבודות (Portfolios)</Heading>
-                        <Text color="gray">היצירות והפרויקטים של חברי הקהילה</Text>
-                    </Box>
-                    <Dialog.Root open={openUpload} onOpenChange={setOpenUpload}>
-                        <Dialog.Trigger>
-                            <Button size="2" variant="solid">
-                                <PlusIcon /> הוסף פרויקט חדש
-                            </Button>
-                        </Dialog.Trigger>
+            {/* Header Section */}
+            <Flex justify="between" align="center">
+                <Box>
+                    <Heading size="6" mb="1">תיקי עבודות (Portfolios)</Heading>
+                    <Text color="gray">היצירות והפרויקטים של חברי הקהילה</Text>
+                </Box>
+                <Dialog.Root open={openUpload} onOpenChange={setOpenUpload}>
+                    <Dialog.Trigger>
+                        <Button size="2" variant="solid">
+                            <PlusIcon /> הוסף פרויקט חדש
+                        </Button>
+                    </Dialog.Trigger>
 
-                        <Dialog.Content style={{ maxWidth: 450 }}>
-                            <Dialog.Title>העלאת פרויקט חדש</Dialog.Title>
-                            <Dialog.Description size="2" mb="4">
-                                שתף את העבודה שלך עם הקהילה.
-                            </Dialog.Description>
+                    <Dialog.Content style={{ maxWidth: 450 }}>
+                        <Dialog.Title>העלאת פרויקט חדש</Dialog.Title>
+                        <Dialog.Description size="2" mb="4">
+                            שתף את העבודה שלך עם הקהילה.
+                        </Dialog.Description>
 
-                            <Flex direction="column" gap="3">
-                                <Box>
-                                    <Text as="div" size="2" mb="1" weight="bold">שם הפרויקט</Text>
-                                    <TextField.Root
-                                        placeholder="לדוגמה: עיצוב הספרייה החדשה"
-                                        value={newTitle}
-                                        onChange={(e) => setNewTitle(e.target.value)}
-                                        style={{ textAlign: 'right', direction: 'rtl' }}
-                                    />
-                                </Box>
-                                <Box>
-                                    <Text as="div" size="2" mb="1" weight="bold">קטגוריה</Text>
-                                    <TextField.Root
-                                        placeholder="לדוגמה: אדריכלות, אומנות, קוד..."
-                                        value={newCategory}
-                                        onChange={(e) => setNewCategory(e.target.value)}
-                                        style={{ textAlign: 'right', direction: 'rtl' }}
-                                    />
-                                </Box>
-                                <Box>
-                                    <Text as="div" size="2" mb="1" weight="bold">תמונה (URL)</Text>
-                                    <TextField.Root placeholder="https://..." style={{ textAlign: 'right', direction: 'rtl' }} />
-                                    <Text size="1" color="gray">כרגע נבחר תמונה אקראית אם לא תזין</Text>
-                                </Box>
-                            </Flex>
-
-                            <Flex gap="3" mt="4" justify="end">
-                                <Dialog.Close>
-                                    <Button variant="soft" color="gray">ביטול</Button>
-                                </Dialog.Close>
-                                <Button onClick={handleUpload}>שמור ופרסם</Button>
-                            </Flex>
-                        </Dialog.Content>
-                    </Dialog.Root>
-                </Flex>
-
-                {/* Filter Tabs */}
-                <Tabs.Root defaultValue="all" onValueChange={setFilter}>
-                    <Tabs.List>
-                        <Tabs.Trigger value="all">כל העבודות</Tabs.Trigger>
-                        <Tabs.Trigger value="likes">מועדפים שלי ❤️</Tabs.Trigger>
-                        <Tabs.Trigger value="my_work">העבודות שלי</Tabs.Trigger>
-                    </Tabs.List>
-                </Tabs.Root>
-
-                {/* Grid */}
-                <Grid columns={{ initial: '1', sm: '2', md: '3' }} gap="4">
-                    {filteredPortfolios.map((item) => (
-                        <Card key={item.id} style={{ padding: 0, overflow: 'hidden' }}>
-                            <Box
-                                style={{ position: 'relative', height: '180px', cursor: 'pointer' }}
-                                onClick={() => setSelectedPortfolio(item)}
-                            >
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        <Flex direction="column" gap="3">
+                            <Box>
+                                <Text as="div" size="2" mb="1" weight="bold">שם הפרויקט</Text>
+                                <TextField.Root
+                                    placeholder="לדוגמה: עיצוב הספרייה החדשה"
+                                    value={newTitle}
+                                    onChange={(e) => setNewTitle(e.target.value)}
+                                    style={{ textAlign: 'right', direction: 'rtl' }}
                                 />
-                                <Badge color="gray" variant="solid" style={{ position: 'absolute', top: 10, right: 10 }}>
-                                    {item.category}
-                                </Badge>
                             </Box>
-                            <Box p="3">
-                                <Flex justify="between" align="start" mb="2">
-                                    <Box>
-                                        <Text weight="bold" size="3" as="div" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '180px' }}>
-                                            {item.title}
-                                        </Text>
-                                        <Flex align="center" gap="2" mt="1">
-                                            <Avatar size="1" radius="full" fallback={item.author[0]} />
-                                            <Text size="1" color="gray">{item.author}</Text>
-                                        </Flex>
-                                    </Box>
-                                </Flex>
-
-                                <Flex justify="between" align="center" mt="3">
-                                    <Button variant="ghost" size="1" onClick={() => setSelectedPortfolio(item)}>עוד פרטים</Button>
-                                    <Flex align="center" gap="1">
-                                        <Text size="1" color="gray">{item.likes}</Text>
-                                        <IconButton
-                                            variant="ghost"
-                                            color={item.isLiked ? "red" : "gray"}
-                                            onClick={() => handleLike(item.id)}
-                                        >
-                                            {item.isLiked ? <HeartFilledIcon /> : <HeartIcon />}
-                                        </IconButton>
-                                    </Flex>
-                                </Flex>
+                            <Box>
+                                <Text as="div" size="2" mb="1" weight="bold">קטגוריה</Text>
+                                <TextField.Root
+                                    placeholder="לדוגמה: אדריכלות, אומנות, קוד..."
+                                    value={newCategory}
+                                    onChange={(e) => setNewCategory(e.target.value)}
+                                    style={{ textAlign: 'right', direction: 'rtl' }}
+                                />
                             </Box>
-                        </Card>
-                    ))}
-                </Grid>
+                            <Box>
+                                <Text as="div" size="2" mb="1" weight="bold">תמונה (URL)</Text>
+                                <TextField.Root placeholder="https://..." style={{ textAlign: 'right', direction: 'rtl' }} />
+                                <Text size="1" color="gray">כרגע נבחר תמונה אקראית אם לא תזין</Text>
+                            </Box>
+                        </Flex>
 
-                {/* Project Detail Modal */}
-                <Dialog.Root open={!!selectedPortfolio} onOpenChange={(open) => !open && setSelectedPortfolio(null)}>
-                    <Dialog.Content style={{ maxWidth: 800 }}>
-                        {selectedPortfolio && (
-                            <Flex direction={{ initial: 'column', sm: 'row' }} gap="5">
-                                {/* Image Side */}
-                                <Box style={{ flex: 1.5 }}>
-                                    <img
-                                        src={selectedPortfolio.image}
-                                        alt={selectedPortfolio.title}
-                                        style={{ width: '100%', borderRadius: '8px', objectFit: 'cover', maxHeight: '400px' }}
-                                    />
-                                </Box>
-
-                                {/* Info Side */}
-                                <Flex direction="column" style={{ flex: 1 }} justify="between">
-                                    <Box>
-                                        <Flex justify="between" align="start" mb="2">
-                                            <Heading size="6">{selectedPortfolio.title}</Heading>
-                                            <Dialog.Close>
-                                                <IconButton variant="ghost" color="gray"><Button variant="ghost" color="gray">X</Button></IconButton>
-                                            </Dialog.Close>
-                                        </Flex>
-
-                                        <Badge color="indigo" mb="3">{selectedPortfolio.category}</Badge>
-
-                                        <Flex gap="2" align="center" mb="4">
-                                            <Avatar size="2" radius="full" fallback={selectedPortfolio.author[0]} />
-                                            <Text weight="medium">{selectedPortfolio.author}</Text>
-                                        </Flex>
-
-                                        <Text size="2" color="gray" style={{ lineHeight: '1.6' }}>
-                                            {selectedPortfolio.description}
-                                        </Text>
-                                    </Box>
-
-                                    <Flex gap="3" mt="6" justify="end">
-                                        <Button
-                                            variant={selectedPortfolio.isLiked ? "soft" : "outline"}
-                                            color="red"
-                                            onClick={() => handleLike(selectedPortfolio.id)}
-                                        >
-                                            {selectedPortfolio.isLiked ? <HeartFilledIcon /> : <HeartIcon />}
-                                            {selectedPortfolio.isLiked ? "אהבתי" : "לייק"} ({selectedPortfolio.likes})
-                                        </Button>
-                                        <Button variant="solid">צור קשר</Button>
-                                    </Flex>
-                                </Flex>
-                            </Flex>
-                        )}
+                        <Flex gap="3" mt="4" justify="end">
+                            <Dialog.Close asChild>
+                                <Button variant="soft" color="gray">ביטול</Button>
+                            </Dialog.Close>
+                            <Button onClick={handleUpload}>שמור ופרסם</Button>
+                        </Flex>
                     </Dialog.Content>
                 </Dialog.Root>
-
             </Flex>
-        </AppLayout>
+
+            {/* Filter Tabs */}
+            {/* The Tabs.Root and Tabs.List components were removed as per instruction. */}
+            {/* The individual Tabs.Trigger components are no longer functional without the Tabs.Root context. */}
+            {/* If filtering functionality is still desired, it would need to be re-implemented with different components. */}
+            <Flex gap="2" mb="4">
+                <Button variant="soft" value="all">כל העבודות</Button>
+                <Button variant="soft" value="likes">מועדפים שלי ❤️</Button>
+                <Button variant="soft" value="my_work">העבודות שלי</Button>
+            </Flex>
+
+            {/* Grid */}
+            <Grid columns={{ initial: '1', sm: '2', md: '3' }} gap="4">
+                {filteredPortfolios.map((item) => (
+                    <Card key={item.id} style={{ padding: 0, overflow: 'hidden' }}>
+                        <Box
+                            style={{ position: 'relative', height: '180px', cursor: 'pointer' }}
+                            onClick={() => setSelectedPortfolio(item)}
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                            <Badge color="gray" variant="solid" style={{ position: 'absolute', top: 10, right: 10 }}>
+                                {item.category}
+                            </Badge>
+                        </Box>
+                        <Box p="3">
+                            <Flex justify="between" align="start" mb="2">
+                                <Box>
+                                    <Text weight="bold" size="3" as="div" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '180px' }}>
+                                        {item.title}
+                                    </Text>
+                                    <Flex align="center" gap="2" mt="1">
+                                        <Avatar size="1" radius="full" fallback={item.author[0]} />
+                                        <Text size="1" color="gray">{item.author}</Text>
+                                    </Flex>
+                                </Box>
+                            </Flex>
+
+                            <Flex justify="between" align="center" mt="3">
+                                <Button variant="ghost" size="1" onClick={() => setSelectedPortfolio(item)}>עוד פרטים</Button>
+                                <Flex align="center" gap="1">
+                                    <Text size="1" color="gray">{item.likes}</Text>
+                                    <IconButton
+                                        variant="ghost"
+                                        color={item.isLiked ? "red" : "gray"}
+                                        onClick={() => handleLike(item.id)}
+                                    >
+                                        {item.isLiked ? <HeartFilledIcon /> : <HeartIcon />}
+                                    </IconButton>
+                                </Flex>
+                            </Flex>
+                        </Box>
+                    </Card>
+                ))}
+            </Grid>
+
+            {/* Project Detail Modal */}
+            <Dialog.Root open={!!selectedPortfolio} onOpenChange={(open) => !open && setSelectedPortfolio(null)}>
+                <Dialog.Content style={{ maxWidth: 800 }}>
+                    {selectedPortfolio && (
+                        <Flex direction={{ initial: 'column', sm: 'row' }} gap="5">
+                            {/* Image Side */}
+                            <Box style={{ flex: 1.5 }}>
+                                <img
+                                    src={selectedPortfolio.image}
+                                    alt={selectedPortfolio.title}
+                                    style={{ width: '100%', borderRadius: '8px', objectFit: 'cover', maxHeight: '400px' }}
+                                />
+                            </Box>
+
+                            {/* Info Side */}
+                            <Flex direction="column" style={{ flex: 1 }} justify="between">
+                                <Box>
+                                    <Flex justify="between" align="start" mb="2">
+                                        <Dialog.Title size="6" mb="0">{selectedPortfolio.title}</Dialog.Title>
+                                        <Dialog.Close asChild>
+                                            <IconButton variant="ghost" color="gray">
+                                                <Cross2Icon />
+                                            </IconButton>
+                                        </Dialog.Close>
+                                    </Flex>
+
+                                    <Badge color="indigo" mb="3">{selectedPortfolio.category}</Badge>
+
+                                    <Flex gap="2" align="center" mb="4">
+                                        <Avatar size="2" radius="full" fallback={selectedPortfolio.author[0]} />
+                                        <Text weight="medium">{selectedPortfolio.author}</Text>
+                                    </Flex>
+
+                                    <Dialog.Description size="2" color="gray" style={{ lineHeight: '1.6' }}>
+                                        {selectedPortfolio.description}
+                                    </Dialog.Description>
+                                </Box>
+
+                                <Flex gap="3" mt="6" justify="end">
+                                    <Button
+                                        variant={selectedPortfolio.isLiked ? "soft" : "outline"}
+                                        color="red"
+                                        onClick={() => handleLike(selectedPortfolio.id)}
+                                    >
+                                        {selectedPortfolio.isLiked ? <HeartFilledIcon /> : <HeartIcon />}
+                                        {selectedPortfolio.isLiked ? "אהבתי" : "לייק"} ({selectedPortfolio.likes})
+                                    </Button>
+                                    <Button variant="solid">צור קשר</Button>
+                                </Flex>
+                            </Flex>
+                        </Flex>
+                    )}
+                </Dialog.Content>
+            </Dialog.Root>
+
+        </Flex>
     );
 }

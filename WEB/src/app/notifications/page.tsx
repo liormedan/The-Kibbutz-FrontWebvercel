@@ -1,7 +1,5 @@
 "use client";
 
-import { AppLayout } from "../../components/AppLayout";
-import { NavigationSidebar } from "../../components/MainMenuRight";
 import { Box, Card, Flex, Text, Avatar, Button, Separator } from "@radix-ui/themes";
 import { HeartIcon, ChatBubbleIcon, PersonIcon, BellIcon } from "@radix-ui/react-icons";
 
@@ -24,48 +22,43 @@ export default function NotificationsPage() {
     };
 
     return (
-        <AppLayout
-            navigation={<NavigationSidebar />}
-            widgets={null}
-        >
-            <Flex direction="column" gap="4" p="4">
-                <Text size="5" weight="bold" mb="2">התראות</Text>
+        <Flex direction="column" gap="4" p="4">
+            <Text size="5" weight="bold" mb="2">התראות</Text>
 
-                <Flex direction="column" gap="2">
-                    {notifications.map((notif) => (
-                        <Card key={notif.id} style={{
-                            backgroundColor: notif.unread ? 'var(--accent-2)' : 'transparent',
-                            transition: 'background-color 0.2s'
-                        }}>
-                            <Flex align="center" gap="3">
-                                <Box
-                                    style={{
-                                        padding: '10px',
-                                        borderRadius: '50%',
-                                        background: 'var(--gray-3)',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}
-                                >
-                                    {getIcon(notif.type)}
-                                </Box>
-                                <Box style={{ flexGrow: 1 }}>
-                                    <Text as="div" size="2" weight={notif.unread ? "bold" : "regular"}>
-                                        {notif.text}
-                                    </Text>
-                                    <Text as="div" size="1" color="gray">
-                                        {notif.time}
-                                    </Text>
-                                </Box>
-                                {notif.unread && (
-                                    <Box style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-9)' }} />
-                                )}
-                            </Flex>
-                        </Card>
-                    ))}
-                </Flex>
+            <Flex direction="column" gap="2">
+                {notifications.map((notif) => (
+                    <Card key={notif.id} style={{
+                        backgroundColor: notif.unread ? 'var(--accent-2)' : 'transparent',
+                        transition: 'background-color 0.2s'
+                    }}>
+                        <Flex align="center" gap="3">
+                            <Box
+                                style={{
+                                    padding: '10px',
+                                    borderRadius: '50%',
+                                    background: 'var(--gray-3)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                {getIcon(notif.type)}
+                            </Box>
+                            <Box style={{ flexGrow: 1 }}>
+                                <Text as="div" size="2" weight={notif.unread ? "bold" : "regular"}>
+                                    {notif.text}
+                                </Text>
+                                <Text as="div" size="1" color="gray">
+                                    {notif.time}
+                                </Text>
+                            </Box>
+                            {notif.unread && (
+                                <Box style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-9)' }} />
+                            )}
+                        </Flex>
+                    </Card>
+                ))}
             </Flex>
-        </AppLayout>
+        </Flex>
     );
 }

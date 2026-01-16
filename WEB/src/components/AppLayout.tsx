@@ -3,24 +3,30 @@
 import { Box, Container, Grid, Flex, TextField, IconButton, Avatar, Text, Card, DropdownMenu } from "@radix-ui/themes";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 import { MagnifyingGlassIcon, BellIcon, PersonIcon, HomeIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { NotificationsPopover } from "./NotificationsPopover";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Header = () => (
     <Box
         style={{
-            background: 'rgba(255, 255, 255, 0.9)',
+            backgroundColor: 'var(--color-background)',
             backdropFilter: 'blur(10px)',
             borderBottom: '1px solid var(--gray-alpha-5)',
-            position: 'sticky',
+            position: 'fixed',
             top: 0,
-            zIndex: 10,
+            left: 0,
+            right: 0,
+            zIndex: 50,
+            height: '64px',
+            display: 'flex',
+            alignItems: 'center'
         }}
-        py="3"
     >
         <Container size="4">
-            <Flex justify="between" align="center">
+            <Flex justify="between" align="center" style={{ height: '100%' }}>
                 {/* Right: Logo & Icons */}
                 <Flex align="center" gap="5">
                     <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -54,6 +60,7 @@ export const Header = () => (
 
                 {/* Left: Profile & Notifications */}
                 <Flex gap="3" align="center">
+                    <ThemeToggle showLabel={false} />
                     <NotificationsPopover />
 
                     <DropdownMenu.Root>
@@ -103,7 +110,16 @@ interface AppLayoutProps {
     widgets?: ReactNode;
 }
 
+// ... existing imports
+
 export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => {
+    const pathname = usePathname();
+    const isLoginPage = pathname === '/login';
+
+    if (isLoginPage) {
+        return <>{children}</>;
+    }
+
     const columns = {
         initial: "1fr",
         md: navigation && widgets ? "240px 1fr 300px" : navigation ? "240px 1fr" : widgets ? "1fr 300px" : "1fr",
@@ -111,26 +127,27 @@ export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => 
     };
 
     return (
-        <Box>
+        <Box style={{ backgroundColor: 'var(--gray-1)', minHeight: '100vh' }}>
             <Header />
-            <Container size="4" mt="4">
+            <Container style={{ maxWidth: '1200px', margin: '0 auto', padding: '84px 16px 24px 16px', minHeight: '100vh' }}>
                 <Grid
                     columns={columns}
                     gap="4"
                     align="start"
                 >
+                    {/* Fixed Sidebar Column */}
                     {navigation && (
-                        <Box>
+                        <Box style={{ width: '240px', position: 'sticky', top: '84px', height: 'calc(100vh - 100px)' }}>
                             {navigation}
                         </Box>
                     )}
 
-                    <Card size="3" style={{ padding: '0' }}>
+                    <Card size="3" style={{ padding: '0', minWidth: 0 }}>
                         {children}
                     </Card>
 
                     {widgets && (
-                        <Box>
+                        <Box style={{ width: '300px', position: 'sticky', top: '84px', height: 'calc(100vh - 100px)' }}>
                             {widgets}
                         </Box>
                     )}
