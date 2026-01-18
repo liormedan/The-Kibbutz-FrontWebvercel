@@ -68,25 +68,6 @@ export const NavigationSidebar = () => {
                 </Button>
             </Link>
 
-            {/* 3. Footer / Bottom Actions */}
-            <Flex direction="column" gap="2" px="2">
-                <Button variant="ghost" style={{ justifyContent: 'flex-start', color: 'var(--gray-11)' }}>
-                    <Flex gap="2" align="center">
-                        <ExitIcon width="16" height="16" />
-                        <Text>להתנתק</Text>
-                    </Flex>
-                </Button>
-
-                <Flex gap="3" wrap="wrap" mt="2">
-                    <Text size="1" color="gray" style={{ cursor: 'pointer' }}>הסכם משתמש</Text>
-                    <Text size="1" color="gray" style={{ cursor: 'pointer' }}>מדיניות פרטיות</Text>
-                    <Text size="1" color="gray" style={{ cursor: 'pointer' }}>מדיניות העוגיות</Text>
-                </Flex>
-
-            </Flex>
-
         </Flex>
     );
 };
-
-

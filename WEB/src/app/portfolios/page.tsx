@@ -110,7 +110,7 @@ export default function PortfoliosPage() {
                         </Flex>
 
                         <Flex gap="3" mt="4" justify="end">
-                            <Dialog.Close asChild>
+                            <Dialog.Close>
                                 <Button variant="soft" color="gray">ביטול</Button>
                             </Dialog.Close>
                             <Button onClick={handleUpload}>שמור ופרסם</Button>
@@ -196,7 +196,7 @@ export default function PortfoliosPage() {
                                 <Box>
                                     <Flex justify="between" align="start" mb="2">
                                         <Dialog.Title size="6" mb="0">{selectedPortfolio.title}</Dialog.Title>
-                                        <Dialog.Close asChild>
+                                        <Dialog.Close>
                                             <IconButton variant="ghost" color="gray">
                                                 <Cross2Icon />
                                             </IconButton>

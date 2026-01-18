@@ -38,6 +38,24 @@ export default function RootLayout({
             margin-right: 0 !important;
             margin-left: 0 !important;
           }
+          
+          /* Forced Color Overrides to fight Radix Specificity */
+          :root, .radix-themes, [data-is-root-theme="true"] {
+             --color-background: #fbf1f1 !important;
+             --color-foreground: #6a6f7d !important;
+             
+             --accent-9: #6a6f7d !important;
+             --accent-10: #5a5f6b !important;
+             --accent-11: #fbf1f1 !important;
+             --accent-a9: #6a6f7d !important;
+             
+             --secondary: #f1dab0 !important;
+             --gray-surface: #bedce4 !important;
+          }
+          
+          .rt-Card {
+             border-color: var(--accent-9) !important;
+          }
         `}} />
         <ThemeProvider>
           <AppLayout navigation={<NavigationSidebar />}>

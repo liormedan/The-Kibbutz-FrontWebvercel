@@ -81,7 +81,7 @@ export const Header = () => (
                                 style={{ cursor: 'pointer' }}
                             />
                         </DropdownMenu.Trigger>
-                        <DropdownMenu.Content align="end" dir="rtl">
+                        <DropdownMenu.Content align="end">
                             <DropdownMenu.Item style={{ textAlign: 'right', flexDirection: 'row-reverse' }}>
                                 <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%', textAlign: 'right', display: 'block' }}>
                                     הפרופיל שלי

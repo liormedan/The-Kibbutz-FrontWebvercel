@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Box, Flex, Text, Avatar, Popover, Button, ScrollArea } from "@radix-ui/themes";
 import { BellIcon, HeartIcon, ChatBubbleIcon, PersonIcon } from "@radix-ui/react-icons";
 import { NotificationItem } from "./NotificationItem";
@@ -13,9 +14,23 @@ const notifications = [
 ];
 
 export const NotificationsPopover = () => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) {
+        return (
+            <Button variant="ghost" color="gray" style={{ padding: 0, width: '36px', height: '36px', color: 'var(--gray-12)' }}>
+                <BellIcon width="24" height="24" />
+            </Button>
+        );
+    }
+
     return (
         <Popover.Root>
-            <Popover.Trigger asChild>
+            <Popover.Trigger>
                 <Button variant="ghost" color="gray" style={{ padding: 0, width: '36px', height: '36px', color: 'var(--gray-12)' }}>
                     <BellIcon width="24" height="24" />
                 </Button>

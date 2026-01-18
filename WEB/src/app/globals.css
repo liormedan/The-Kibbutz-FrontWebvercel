@@ -1,4 +1,27 @@
 /* Globals */
+:root,
+.radix-themes {
+  /* Light Theme Palette */
+  --color-background: #fbf1f1;
+  --color-foreground: #6a6f7d;
+
+  /* Overriding or defining Accent/Gray for Custom Usage */
+  --accent-9: #6a6f7d !important;
+  /* Primary Brand: Dark Grey */
+  --accent-10: #5a5f6b !important;
+  /* Hover state */
+  --accent-11: #fbf1f1 !important;
+  /* Text on Accent */
+  --accent-a9: #6a6f7d !important;
+  /* Alpha variant overrides */
+
+  --secondary: #f1dab0;
+  /* Gold/Beige */
+  --gray-surface: #bedce4;
+  /* Light Blue Grey */
+  --gray-1: #fbf1f1;
+}
+
 /* Radix UI Themes handles most resets, but we can add specific global overrides here if needed. */
 
 body {

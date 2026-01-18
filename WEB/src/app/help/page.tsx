@@ -12,7 +12,7 @@ export default function HelpPage() {
                 <Flex direction="column" gap="3">
                     <details style={{ cursor: 'pointer' }}>
                         <summary style={{ fontWeight: 'bold', marginBottom: '8px' }}>איך משנים סיסמה?</summary>
-                        <Text size="2">ניתן לשנות סיסמה דרך דף ההגדרות > פרטיות ואבטחה.</Text>
+                        <Text size="2">ניתן לשנות סיסמה דרך דף ההגדרות &gt; פרטיות ואבטחה.</Text>
                     </details>
 
                     <details style={{ cursor: 'pointer' }}>
