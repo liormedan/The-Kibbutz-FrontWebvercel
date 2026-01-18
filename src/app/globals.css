@@ -22,6 +22,27 @@
   --gray-1: #fbf1f1;
 }
 
+.dark {
+  /* Standard Dark Mode Palette */
+  --color-background: #111111 !important;
+  --color-foreground: #ededed !important;
+
+  /* Accent overrides for dark mode - keeping it neutral/gray */
+  --accent-9: #ededed !important;
+  --accent-10: #ffffff !important;
+  --accent-11: #333333 !important;
+  --accent-a9: #111111 !important;
+
+  /* Surfaces */
+  --secondary: #2a2a2a;
+  --gray-surface: #1a1a1a;
+  --gray-1: #111111;
+
+  /* Radix variable overrides for dark mode if needed */
+  --gray-alpha-5: rgba(255, 255, 255, 0.1);
+  --gray-12: #ededed;
+}
+
 /* Radix UI Themes handles most resets, but we can add specific global overrides here if needed. */
 
 body {
