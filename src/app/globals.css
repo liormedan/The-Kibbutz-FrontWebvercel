@@ -22,10 +22,15 @@
   --gray-1: #fbf1f1;
 }
 
-.dark {
+.dark,
+.dark .radix-themes,
+[class~="dark"] .radix-themes {
   /* Standard Dark Mode Palette */
   --color-background: #111111 !important;
   --color-foreground: #ededed !important;
+
+  background-color: #111111 !important;
+  color: #ededed !important;
 
   /* Accent overrides for dark mode - keeping it neutral/gray */
   --accent-9: #ededed !important;
