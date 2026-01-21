@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Card, Flex, Text, Button } from "@radix-ui/themes";
+import { Box, Card, Flex, Text, Button, Separator } from "@radix-ui/themes";
 import { HomeIcon, ChatBubbleIcon, PersonIcon, GearIcon, BackpackIcon, ExitIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,7 +24,7 @@ export const NavigationSidebar = () => {
             <ProfileCard />
 
             {/* 2. Navigation Section */}
-            <Card size="2" style={{ padding: '8px' }}>
+            <Card size="2" style={{ padding: '12px' }}>
                 <Flex direction="column" gap="1">
                     {navItems.map((item) => {
                         const isActive = pathname === item.path;
@@ -33,52 +33,107 @@ export const NavigationSidebar = () => {
                                 <Button
                                     variant="ghost"
                                     style={{
-                                        justifyContent: "space-between",
                                         height: "48px",
                                         width: "100%",
-                                        color: isActive ? 'var(--color-white)' : 'var(--color-foreground)',
-                                        backgroundColor: isActive ? 'var(--accent-9)' : 'transparent',
                                         fontSize: '16px',
                                         fontWeight: 'bold',
-                                        padding: '0 16px',
-                                        borderRadius: '8px',
-                                        border: isActive ? '1px solid var(--accent-9)' : 'none'
+                                        padding: 0,
+                                        margin: '4px',
+                                        backgroundColor: 'transparent',
                                     }}
                                 >
-                                    <Flex align="center" gap="3">
-                                        <Box style={{
-                                            background: isActive ? 'var(--color-white)' : 'var(--gray-3)',
-                                            padding: '6px',
-                                            borderRadius: '8px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            minWidth: '32px',
-                                            minHeight: '32px'
-                                        }}>
-                                            <Box style={{ 
-                                                color: isActive ? 'var(--accent-9)' : 'var(--color-foreground)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center'
-                                            }}>
-                                                {item.icon}
+                                    <Flex
+                                        align="center"
+                                        gap="3"
+                                        style={{
+                                            justifyContent: "flex-start",
+                                            height: "48px",
+                                            width: "100%",
+                                            padding: '0 16px',
+                                            borderRadius: '14px',
+                                            overflow: 'hidden',
+                                            backgroundColor: isActive ? 'var(--accent-9)' : 'transparent',
+                                            border: isActive ? '1px solid var(--accent-9)' : '1px solid transparent',
+                                            boxShadow: isActive ? '0 2px 10px rgba(0,0,0,0.08)' : 'none',
+                                            color: isActive ? 'var(--color-white)' : 'var(--color-foreground)',
+                                            direction: 'rtl',
+                                        }}
+                                    >
+                                        <Flex
+                                            align="center"
+                                            gap="3"
+                                            style={{
+                                                direction: 'rtl',
+                                                width: '100%',
+                                                justifyContent: 'flex-start',
+                                            }}
+                                        >
+                                            <Box
+                                                style={{
+                                                    background: isActive ? 'var(--color-white)' : 'var(--gray-3)',
+                                                    padding: '6px',
+                                                    borderRadius: '10px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    minWidth: '32px',
+                                                    minHeight: '32px'
+                                                }}
+                                            >
+                                                <Box
+                                                    style={{
+                                                        color: isActive ? 'var(--accent-9)' : 'var(--color-foreground)',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center'
+                                                    }}
+                                                >
+                                                    {item.icon}
+                                                </Box>
                                             </Box>
-                                        </Box>
-                                        <Text>{item.label}</Text>
+                                            <Text style={{ textAlign: 'right' }}>{item.label}</Text>
+                                        </Flex>
                                     </Flex>
                                 </Button>
                             </Link>
                         );
                     })}
+
+                    <Separator my="2" />
+
+                    <Button
+                        variant="ghost"
+                        color="red"
+                        style={{
+                            height: "48px",
+                            width: "100%",
+                            padding: '0 16px',
+                            borderRadius: '14px',
+                            justifyContent: 'flex-start',
+                            margin: '4px',
+                            direction: 'rtl',
+                        }}
+                    >
+                        <Flex align="center" gap="3" style={{ direction: 'rtl' }}>
+                            <Box
+                                style={{
+                                    background: 'var(--gray-3)',
+                                    padding: '6px',
+                                    borderRadius: '10px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    minWidth: '32px',
+                                    minHeight: '32px'
+                                }}
+                            >
+                                <ExitIcon width="20" height="20" />
+                            </Box>
+                            <Text style={{ textAlign: 'right' }}>התנתק</Text>
+                        </Flex>
+                    </Button>
                 </Flex>
             </Card>
-
-            <Link href="/settings" style={{ textDecoration: 'none' }}>
-                <Button variant="ghost" style={{ width: '100%', justifyContent: 'center', color: 'var(--color-foreground)' }}>
-                    <Text>הגדרות</Text>
-                </Button>
-            </Link>
 
         </Flex>
     );

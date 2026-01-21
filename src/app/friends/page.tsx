@@ -74,13 +74,16 @@ const FriendCard = ({ friend }: { friend: any }) => {
                     fallback={friend.name[0]}
                     size="4"
                     radius="full"
-                    color="indigo"
+                    style={{
+                        backgroundColor: '#FF0000',
+                        color: 'var(--color-white)'
+                    }}
                 />
                 <Box style={{ flexGrow: 1 }}>
                     <Text weight="bold" as="div">{friend.name}</Text>
                     <Text size="1" color="gray" as="div">{friend.role}</Text>
                     <Flex gap="1" align="center" mt="1">
-                        <PersonIcon width="12" height="12" color="var(--gray-9)" />
+                        <PersonIcon width="12" height="12" style={{ color: 'var(--color-gray-text)' }} />
                         <Text size="1" color="gray">{friend.mutual} חברים משותפים</Text>
                     </Flex>
                 </Box>
@@ -88,13 +91,31 @@ const FriendCard = ({ friend }: { friend: any }) => {
             <Flex gap="2" mt="3">
                 <Button
                     variant={requestStatus === "sent" ? "outline" : "solid"}
-                    color={requestStatus === "sent" ? "green" : "indigo"}
-                    style={{ flexGrow: 1, cursor: 'pointer' }}
+                    color={requestStatus === "sent" ? "green" : undefined}
+                    style={{
+                        flexGrow: 1,
+                        cursor: 'pointer',
+                        backgroundColor: requestStatus === "sent" ? undefined : 'var(--accent-9)',
+                        color: requestStatus === "sent" ? undefined : 'var(--color-white)',
+                        border: requestStatus === "sent" ? undefined : 'none'
+                    }}
                     onClick={handleAddFriend}
                 >
                     {requestStatus === "sent" ? "בקשה נשלחה ✓" : "הוסף חבר"}
                 </Button>
-                <Button variant="soft" style={{ flexGrow: 1, cursor: 'pointer' }}>הודעה</Button>
+                <Button
+                    variant="soft"
+                    color={undefined}
+                    style={{
+                        flexGrow: 1,
+                        cursor: 'pointer',
+                        backgroundColor: 'var(--color-gray-text)',
+                        color: 'var(--color-white)',
+                        border: 'none',
+                    }}
+                >
+                    הודעה
+                </Button>
             </Flex>
         </Card>
     );

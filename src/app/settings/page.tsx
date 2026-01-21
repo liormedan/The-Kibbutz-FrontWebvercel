@@ -1,9 +1,14 @@
 "use client";
 
 import { Box, Flex, Text, Card, Tabs, TextField, Button, Switch, Separator, Avatar, Select } from "@radix-ui/themes";
-import { PersonIcon, LockClosedIcon, BellIcon, EyeOpenIcon, ExitIcon } from "@radix-ui/react-icons";
+import { PersonIcon, LockClosedIcon, BellIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
 
 export default function SettingsPage() {
+    const { theme, setTheme } = useTheme();
+
+    const isDark = theme === "dark";
+
     const menuItems = [
         { id: "account", label: "חשבון", icon: <PersonIcon /> },
         { id: "privacy", label: "פרטיות", icon: <LockClosedIcon /> },
@@ -12,7 +17,7 @@ export default function SettingsPage() {
     ];
 
     return (
-        <Card size="3" style={{ padding: 0 }}>
+        <Card size="3" style={{ padding: 0, direction: "rtl", textAlign: "right" }}>
             <Tabs.Root defaultValue="account">
                 {/* Tabs header */}
                 <Box style={{ padding: "16px 16px 0 16px" }}>
@@ -25,15 +30,6 @@ export default function SettingsPage() {
                                 </Flex>
                             </Tabs.Trigger>
                         ))}
-
-                        <Box style={{ flexGrow: 1 }} />
-
-                        <Button variant="ghost" color="red">
-                            <Flex align="center" gap="2" style={{ flexDirection: "row-reverse" }}>
-                                <ExitIcon />
-                                <Text>התנתק</Text>
-                            </Flex>
-                        </Button>
                     </Tabs.List>
                 </Box>
 
@@ -61,7 +57,7 @@ export default function SettingsPage() {
 
                             <Separator size="4" />
 
-                            <Flex gap="4" wrap="wrap">
+                            <Flex gap="4" wrap="wrap" style={{ justifyContent: "flex-start" }}>
                                 <Box style={{ minWidth: "260px", flex: 1 }}>
                                     <Text size="2" mb="1" weight="bold" as="div">
                                         שם פרטי
@@ -177,7 +173,7 @@ export default function SettingsPage() {
                             התראות
                         </Text>
                         <Flex direction="column" gap="4" style={{ maxWidth: "700px" }}>
-                            <Flex justify="between" align="center">
+                                <Flex justify="between" align="center" style={{ direction: "rtl" }}>
                                 <Box>
                                     <Text weight="bold" as="div">
                                         הודעות חדשות
@@ -189,7 +185,7 @@ export default function SettingsPage() {
                                 <Switch defaultChecked />
                             </Flex>
                             <Separator />
-                            <Flex justify="between" align="center">
+                                <Flex justify="between" align="center" style={{ direction: "rtl" }}>
                                 <Box>
                                     <Text weight="bold" as="div">
                                         תגובות בפוסטים
@@ -201,7 +197,7 @@ export default function SettingsPage() {
                                 <Switch defaultChecked />
                             </Flex>
                             <Separator />
-                            <Flex justify="between" align="center">
+                                <Flex justify="between" align="center" style={{ direction: "rtl" }}>
                                 <Box>
                                     <Text weight="bold" as="div">
                                         עדכוני קהילה
@@ -220,7 +216,7 @@ export default function SettingsPage() {
                             מראה (Appearance)
                         </Text>
                         <Flex direction="column" gap="4" style={{ maxWidth: "600px" }}>
-                            <Flex justify="between" align="center">
+                            <Flex justify="between" align="center" style={{ direction: "rtl" }}>
                                 <Box>
                                     <Text weight="bold" as="div">
                                         מצב לילה (Dark Mode)
@@ -229,7 +225,10 @@ export default function SettingsPage() {
                                         החלף לממשק כהה
                                     </Text>
                                 </Box>
-                                <Switch />
+                                <Switch
+                                    checked={isDark}
+                                    onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+                                />
                             </Flex>
                         </Flex>
                     </Tabs.Content>
