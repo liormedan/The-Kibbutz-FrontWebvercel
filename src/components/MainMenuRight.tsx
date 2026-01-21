@@ -129,7 +129,7 @@ export const NavigationSidebar = () => {
                             >
                                 <ExitIcon width="20" height="20" />
                             </Box>
-                            <Text style={{ textAlign: 'right' }}>התנתק</Text>
+                            <Text style={{ textAlign: 'right' }}>התנתקות</Text>
                         </Flex>
                     </Button>
                 </Flex>
