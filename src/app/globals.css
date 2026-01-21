@@ -25,12 +25,18 @@
   /* Functional colors from design files */
   --color-orange: #F26331;
   /* Orange - Exact from design files */
+  --color-user-avatar: #F83218;
+  /* User avatar circle - blend of #FF0000 (red) and #F26331 (orange), 50/50 */
   --color-lime: #B5D334;
   /* Lime green - Exact from design files */
   --color-white: #FFFEFE;
   /* White cards/surfaces - Most common white variant from design files */
   --color-gray-text: #858585;
   /* Gray text/icons - Exact from design files */
+
+  /* Chat */
+  --chat-reply-bg: var(--color-white);
+  --chat-reply-fg: var(--color-foreground);
 }
 
 .dark,
@@ -64,12 +70,19 @@
   /* Functional colors from design files */
   --color-orange: #F26331;
   /* Orange - Exact from design files (same as light) */
+  --color-user-avatar: #F83218;
+  /* User avatar circle - blend of #FF0000 (red) and #F26331 (orange), 50/50 */
   --color-lime: #B5D334;
   /* Lime green - Exact from design files (same as light) */
   --color-white: #FFFFFF;
   /* White for cards/text - Exact from design files */
   --color-gray-text: #EDEDED;
   /* Light gray text - Exact from design files */
+
+  /* Chat */
+  --chat-reply-bg: #004400;
+  /* Reply bubble green - exact from Dark mode messeges.png */
+  --chat-reply-fg: var(--color-white);
 
   /* Radix variable overrides for dark mode */
   --gray-alpha-5: rgba(255, 255, 255, 0.1);

@@ -56,7 +56,7 @@ export default function ChatPage() {
             <Flex style={{ height: '100%' }}>
 
                 {/* Right Pane: Chat List */}
-                <Box style={{ width: '300px', borderLeft: '1px solid var(--gray-alpha-5)', background: 'var(--gray-2)', direction: 'rtl', textAlign: 'right' }}>
+                <Box style={{ width: '300px', borderLeft: '1px solid var(--gray-alpha-5)', background: 'var(--gray-surface)', direction: 'rtl', textAlign: 'right' }}>
                     <Box p="3">
                         <Text size="4" weight="bold" mb="3" as="div">הודעות</Text>
                         <TextField.Root placeholder="חפש שיחה...">
@@ -79,7 +79,15 @@ export default function ChatPage() {
                                     className="hover:bg-gray-100"
                                 >
                                     <Flex gap="3" align="center" style={{ flexDirection: 'row-reverse' }}>
-                                        <Avatar fallback={chat.name[0]} radius="full" size="3" color={activeChatId === chat.id ? "indigo" : "gray"} />
+                                        <Avatar
+                                            fallback={chat.name[0]}
+                                            radius="full"
+                                            size="3"
+                                            style={{
+                                                backgroundColor: 'var(--color-user-avatar)',
+                                                color: 'var(--color-white)',
+                                            }}
+                                        />
                                         <Box style={{ flexGrow: 1, overflow: 'hidden' }}>
                                             <Flex justify="between" style={{ flexDirection: 'row-reverse' }}>
                                                 <Text weight={activeChatId === chat.id ? "bold" : "regular"} size="2">{chat.name}</Text>
@@ -112,7 +120,10 @@ export default function ChatPage() {
                                 fallback={conversations.find(c => c.id === activeChatId)?.name[0] || "?"}
                                 size="2"
                                 radius="full"
-                                color="teal"
+                                style={{
+                                    backgroundColor: 'var(--color-user-avatar)',
+                                    color: 'var(--color-white)',
+                                }}
                             />
                             <Box>
                                 <Text weight="bold" size="2" as="div">{conversations.find(c => c.id === activeChatId)?.name}</Text>
@@ -158,8 +169,8 @@ export default function ChatPage() {
                                             maxWidth: '70%',
                                             padding: '10px 14px',
                                             borderRadius: '16px',
-                                            background: msg.sender === 'me' ? 'var(--accent-9)' : 'var(--color-white)',
-                                            color: msg.sender === 'me' ? 'var(--color-white)' : 'inherit',
+                                            background: msg.sender === 'me' ? 'var(--accent-9)' : 'var(--chat-reply-bg)',
+                                            color: msg.sender === 'me' ? 'var(--color-white)' : 'var(--chat-reply-fg)',
                                             border: msg.sender === 'other' ? '1px solid var(--gray-4)' : 'none',
                                             borderBottomRightRadius: msg.sender === 'me' ? '4px' : '16px',
                                             borderBottomLeftRadius: msg.sender === 'other' ? '4px' : '16px',
@@ -192,7 +203,16 @@ export default function ChatPage() {
                                 onKeyDown={handleKeyDown}
                             >
                             </TextField.Root>
-                            <IconButton variant="solid" size="3" onClick={handleSendMessage}>
+                            <IconButton 
+                                variant="solid" 
+                                size="3" 
+                                onClick={handleSendMessage}
+                                style={{ 
+                                    backgroundColor: 'var(--accent-9)', 
+                                    color: 'var(--color-white)',
+                                    border: 'none'
+                                }}
+                            >
                                 <PaperPlaneIcon />
                             </IconButton>
                         </Flex>
