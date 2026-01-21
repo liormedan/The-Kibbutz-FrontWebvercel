@@ -26,7 +26,7 @@ export default function SettingsPage() {
                             <Tabs.Trigger key={item.id} value={item.id}>
                                 <Flex align="center" gap="2" style={{ flexDirection: "row-reverse" }}>
                                     {item.icon}
-                                    <Text>{item.label}</Text>
+                                    <Text weight="bold">{item.label}</Text>
                                 </Flex>
                             </Tabs.Trigger>
                         ))}
