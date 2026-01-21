@@ -109,7 +109,7 @@ const FriendCard = ({ friend }: { friend: any }) => {
                     style={{
                         flexGrow: 1,
                         cursor: 'pointer',
-                        backgroundColor: 'var(--color-gray-text)',
+                        backgroundColor: 'var(--friends-message-btn-bg)',
                         color: 'var(--color-white)',
                         border: 'none',
                     }}

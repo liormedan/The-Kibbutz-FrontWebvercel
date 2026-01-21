@@ -37,6 +37,10 @@
   /* Chat */
   --chat-reply-bg: var(--color-white);
   --chat-reply-fg: var(--color-foreground);
+
+  /* Friends */
+  --friends-message-btn-bg: #858585;
+  /* Message button (Light) - matches design gray */
 }
 
 .dark,
@@ -84,6 +88,10 @@
   /* Reply bubble green - exact from Dark mode messeges.png */
   --chat-reply-fg: var(--color-white);
 
+  /* Friends */
+  --friends-message-btn-bg: #000000;
+  /* Message button (Dark) - black as in design */
+
   /* Radix variable overrides for dark mode */
   --gray-alpha-5: rgba(255, 255, 255, 0.1);
   --gray-12: #EDEDED;
@@ -127,4 +135,45 @@ html {
 .rt-Card::after {
   /* Radix uses ::after for the border usually, let's play safe */
   border-color: var(--accent-9) !important;
+}
+
+/* Switch/Toggle - Turquoise thumb (circle) in Light mode (matching frame color) */
+.rt-SwitchRoot[data-state="checked"] {
+  background-color: var(--gray-surface) !important;
+  border: none !important;
+}
+
+.rt-SwitchRoot[data-state="unchecked"] {
+  background-color: var(--gray-surface) !important;
+  border: none !important;
+}
+
+.rt-SwitchThumb[data-state="checked"] {
+  background-color: var(--accent-9) !important;
+  border: none !important;
+}
+
+.rt-SwitchThumb[data-state="unchecked"] {
+  background-color: var(--color-gray-text) !important;
+  border: none !important;
+}
+
+.dark .rt-SwitchRoot[data-state="checked"] {
+  background-color: var(--gray-surface) !important;
+  border: none !important;
+}
+
+.dark .rt-SwitchRoot[data-state="unchecked"] {
+  background-color: var(--gray-surface) !important;
+  border: none !important;
+}
+
+.dark .rt-SwitchThumb[data-state="checked"] {
+  background-color: var(--accent-9) !important;
+  border: none !important;
+}
+
+.dark .rt-SwitchThumb[data-state="unchecked"] {
+  background-color: var(--color-white) !important;
+  border: none !important;
 }
