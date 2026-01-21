@@ -36,7 +36,7 @@ export const NavigationSidebar = () => {
                                         justifyContent: "space-between",
                                         height: "48px",
                                         width: "100%",
-                                        color: 'var(--color-white)',
+                                        color: isActive ? 'var(--color-white)' : 'var(--color-foreground)',
                                         backgroundColor: isActive ? 'var(--accent-9)' : 'transparent',
                                         fontSize: '16px',
                                         fontWeight: 'bold',
@@ -57,7 +57,7 @@ export const NavigationSidebar = () => {
                                             minHeight: '32px'
                                         }}>
                                             <Box style={{ 
-                                                color: isActive ? 'var(--accent-9)' : 'var(--color-white)',
+                                                color: isActive ? 'var(--accent-9)' : 'var(--color-foreground)',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center'
@@ -75,7 +75,7 @@ export const NavigationSidebar = () => {
             </Card>
 
             <Link href="/settings" style={{ textDecoration: 'none' }}>
-                <Button variant="ghost" style={{ width: '100%', justifyContent: 'center' }}>
+                <Button variant="ghost" style={{ width: '100%', justifyContent: 'center', color: 'var(--color-foreground)' }}>
                     <Text>הגדרות</Text>
                 </Button>
             </Link>
