@@ -21,8 +21,8 @@ export const FeedHeader = () => {
 
 export const FeedComposer = () => {
     return (
-        <Card size="3">
-            <Flex gap="3" p="2">
+        <Card size="3" style={{ padding: '16px' }}>
+            <Flex gap="3">
                 <Avatar fallback="JD" radius="full" size="3" />
                 <Box style={{ flexGrow: 1 }}>
                     <TextArea
@@ -31,7 +31,7 @@ export const FeedComposer = () => {
                         size="3"
                         style={{ height: '80px', resize: 'none' }}
                     />
-                    <Flex justify="between" mt="3" align="center">
+                    <Flex justify="between" mt="4" align="center">
                         <Flex gap="3">
                             <ButtonIconText icon={<ImageIcon />} label="תמונה" />
                             <ButtonIconText icon={<FaceIcon />} label="רגש" />
@@ -60,9 +60,9 @@ export const PostCard = () => {
     };
 
     return (
-        <Card size="1" style={{ overflow: 'hidden' }}>
+        <Card size="1" style={{ overflow: 'hidden', padding: '16px' }}>
             {/* Header */}
-            <Flex justify="between" align="center" p="3">
+            <Flex justify="between" align="center">
                 <Flex gap="3" align="center">
                     <Avatar fallback="SC" size="3" radius="full" color="teal" />
                     <Box>
@@ -77,14 +77,14 @@ export const PostCard = () => {
             </Flex>
 
             {/* Content */}
-            <Box px="3" pb="3">
+            <Box mt="3">
                 <Text size="3" style={{ lineHeight: '1.5' }}>
                     בדיוק סיימנו לשתול את הגינה החדשה! הקהילה מתגבשת בצורה יפהפייה 🌱 #גינהקהילתית #הקיבוץ
                 </Text>
             </Box>
 
             {/* Image Placeholder */}
-            <Box style={{ position: 'relative', width: '100%', height: '300px', background: 'var(--gray-4)' }}>
+            <Box mt="3" style={{ position: 'relative', width: '100%', height: '300px', background: 'var(--gray-4)', borderRadius: '12px' }}>
                 {/* Real implementation would use Next.js Image */}
                 <Flex align="center" justify="center" style={{ height: '100%' }}>
                     <Text color="gray">תמונת פוסט</Text>
@@ -92,7 +92,7 @@ export const PostCard = () => {
             </Box>
 
             {/* Footer */}
-            <Box p="3">
+            <Box mt="3">
                 <Flex justify="between" mb="3">
                     <Text size="1" color="gray">{likesCount} לייקים</Text>
                     <Text size="1" color="gray">5 תגובות</Text>

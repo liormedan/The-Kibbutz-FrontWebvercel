@@ -37,11 +37,12 @@ export const NavigationSidebar = () => {
                                         height: "48px",
                                         width: "100%",
                                         color: 'var(--color-white)',
-                                        backgroundColor: isActive ? 'var(--accent-3)' : 'transparent',
+                                        backgroundColor: isActive ? 'var(--accent-9)' : 'transparent',
                                         fontSize: '16px',
                                         fontWeight: 'bold',
                                         padding: '0 16px',
-                                        borderRadius: '8px'
+                                        borderRadius: '8px',
+                                        border: isActive ? '1px solid var(--accent-9)' : 'none'
                                     }}
                                 >
                                     <Flex align="center" gap="3">
@@ -49,9 +50,20 @@ export const NavigationSidebar = () => {
                                             background: isActive ? 'var(--color-white)' : 'var(--gray-3)',
                                             padding: '6px',
                                             borderRadius: '8px',
-                                            display: 'flex'
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            minWidth: '32px',
+                                            minHeight: '32px'
                                         }}>
-                                            {item.icon}
+                                            <Box style={{ 
+                                                color: isActive ? 'var(--accent-9)' : 'var(--color-white)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
+                                            }}>
+                                                {item.icon}
+                                            </Box>
                                         </Box>
                                         <Text>{item.label}</Text>
                                     </Flex>

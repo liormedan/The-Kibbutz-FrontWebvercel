@@ -150,7 +150,7 @@ export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => 
                         </Box>
                     )}
 
-                    <Card size="3" style={{ padding: '0', minWidth: 0 }}>
+                    <Card size="3" style={{ padding: '16px', minWidth: 0 }}>
                         {children}
                     </Card>
 
