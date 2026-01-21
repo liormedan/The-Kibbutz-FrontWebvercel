@@ -36,7 +36,7 @@ export const NavigationSidebar = () => {
                                         justifyContent: "space-between",
                                         height: "48px",
                                         width: "100%",
-                                        color: isActive ? 'var(--accent-11)' : 'var(--gray-11)',
+                                        color: 'var(--color-white)',
                                         backgroundColor: isActive ? 'var(--accent-3)' : 'transparent',
                                         fontSize: '16px',
                                         fontWeight: 'bold',
@@ -46,7 +46,7 @@ export const NavigationSidebar = () => {
                                 >
                                     <Flex align="center" gap="3">
                                         <Box style={{
-                                            background: isActive ? 'white' : 'var(--gray-3)',
+                                            background: isActive ? 'var(--color-white)' : 'var(--gray-3)',
                                             padding: '6px',
                                             borderRadius: '8px',
                                             display: 'flex'

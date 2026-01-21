@@ -90,7 +90,7 @@ export default function ChatPage() {
                                                     {chat.lastMessage}
                                                 </Text>
                                                 {chat.unread > 0 && (
-                                                    <Flex align="center" justify="center" style={{ background: 'var(--accent-9)', color: 'white', borderRadius: '50%', width: '18px', height: '18px', fontSize: '10px' }}>
+                                                    <Flex align="center" justify="center" style={{ background: 'var(--accent-9)', color: 'var(--color-white)', borderRadius: '50%', width: '18px', height: '18px', fontSize: '10px' }}>
                                                         {chat.unread}
                                                     </Flex>
                                                 )}
@@ -158,8 +158,8 @@ export default function ChatPage() {
                                             maxWidth: '70%',
                                             padding: '10px 14px',
                                             borderRadius: '16px',
-                                            background: msg.sender === 'me' ? 'var(--accent-9)' : 'white',
-                                            color: msg.sender === 'me' ? 'white' : 'inherit',
+                                            background: msg.sender === 'me' ? 'var(--accent-9)' : 'var(--color-white)',
+                                            color: msg.sender === 'me' ? 'var(--color-white)' : 'inherit',
                                             border: msg.sender === 'other' ? '1px solid var(--gray-4)' : 'none',
                                             borderBottomRightRadius: msg.sender === 'me' ? '4px' : '16px',
                                             borderBottomLeftRadius: msg.sender === 'other' ? '4px' : '16px',

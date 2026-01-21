@@ -1,51 +1,79 @@
 /* Globals */
 :root,
 .radix-themes {
-  /* Light Theme Palette */
-  --color-background: #fbf1f1;
-  --color-foreground: #6a6f7d;
+  /* Light Theme Palette - Exact colors from design files */
+  --color-background: #FBF1F1;
+  --color-foreground: #222222;
 
   /* Overriding or defining Accent/Gray for Custom Usage */
-  --accent-9: #6a6f7d !important;
-  /* Primary Brand: Dark Grey */
-  --accent-10: #5a5f6b !important;
-  /* Hover state */
-  --accent-11: #fbf1f1 !important;
-  /* Text on Accent */
-  --accent-a9: #6a6f7d !important;
+  --accent-9: #38D8DF !important;
+  /* Primary Brand: Turquoise (from chats/settings/friends screens) */
+  --accent-10: #30C2C9 !important;
+  /* Hover state / Alternative turquoise (from portfolios screen) */
+  --accent-11: #FFFFFF !important;
+  /* Text on Accent - Pure white */
+  --accent-a9: #222222 !important;
   /* Alpha variant overrides */
 
-  --secondary: #f1dab0;
-  /* Gold/Beige */
-  --gray-surface: #bedce4;
-  /* Light Blue Grey */
-  --gray-1: #fbf1f1;
+  --secondary: #F5C82C;
+  /* Yellow - Exact from design files */
+  --gray-surface: #F0F0F0;
+  /* Light gray surface - Exact from design files */
+  --gray-1: #FBF1F1;
+  /* Background - Exact match */
+
+  /* Functional colors from design files */
+  --color-orange: #F26331;
+  /* Orange - Exact from design files */
+  --color-lime: #B5D334;
+  /* Lime green - Exact from design files */
+  --color-white: #FFFEFE;
+  /* White cards/surfaces - Most common white variant from design files */
+  --color-gray-text: #858585;
+  /* Gray text/icons - Exact from design files */
 }
 
 .dark,
 .dark .radix-themes,
 [class~="dark"] .radix-themes {
-  /* Standard Dark Mode Palette */
+  /* Dark Mode Palette - Exact colors from design files */
   --color-background: #111111 !important;
-  --color-foreground: #ededed !important;
+  --color-foreground: #EDEDED !important;
 
   background-color: #111111 !important;
-  color: #ededed !important;
+  color: #EDEDED !important;
 
-  /* Accent overrides for dark mode - keeping it neutral/gray */
-  --accent-9: #ededed !important;
-  --accent-10: #ffffff !important;
-  --accent-11: #333333 !important;
-  --accent-a9: #111111 !important;
+  /* Accent overrides for dark mode - Exact from design files */
+  --accent-9: #35C9D0 !important;
+  /* Primary Brand: Turquoise (most common in dark mode screens) */
+  --accent-10: #38D8DF !important;
+  /* Alternative turquoise variant */
+  --accent-11: #191919 !important;
+  /* Dark surface for active states */
+  --accent-a9: #EDEDED !important;
+  /* Text on accent - Light text */
 
-  /* Surfaces */
-  --secondary: #2a2a2a;
-  --gray-surface: #1a1a1a;
+  /* Surfaces - Exact from design files */
+  --secondary: #F26331;
+  /* Orange - Same as light mode, exact from design files */
+  --gray-surface: #191919;
+  /* Dark gray surface - Most common in dark mode */
   --gray-1: #111111;
+  /* Background - Exact match */
 
-  /* Radix variable overrides for dark mode if needed */
+  /* Functional colors from design files */
+  --color-orange: #F26331;
+  /* Orange - Exact from design files (same as light) */
+  --color-lime: #B5D334;
+  /* Lime green - Exact from design files (same as light) */
+  --color-white: #FFFFFF;
+  /* White for cards/text - Exact from design files */
+  --color-gray-text: #EDEDED;
+  /* Light gray text - Exact from design files */
+
+  /* Radix variable overrides for dark mode */
   --gray-alpha-5: rgba(255, 255, 255, 0.1);
-  --gray-12: #ededed;
+  --gray-12: #EDEDED;
 }
 
 /* Radix UI Themes handles most resets, but we can add specific global overrides here if needed. */

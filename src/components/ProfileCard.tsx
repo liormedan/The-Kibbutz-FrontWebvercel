@@ -20,7 +20,7 @@ export const ProfileCard = () => {
                         src="/yairarnondemo.png"
                         fallback="\u05D9"
                         radius="full"
-                        style={{ border: '4px solid white' }}
+                        style={{ border: '4px solid var(--color-white)' }}
                     />
                     <Text size="3" weight="bold" mt="2">{"\u05D9\u05D0\u05D9\u05E8 \u05D0\u05E8\u05E0\u05D5\u05DF"}</Text>
                     <Text size="2" color="gray" style={{ direction: 'ltr' }}>@Yair_Arnon</Text>
