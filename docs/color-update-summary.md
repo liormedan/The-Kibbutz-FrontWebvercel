@@ -11,6 +11,7 @@
 - **Secondary (צהוב)**: `#F5C82C`
 - **משטח אפור**: `#F0F0F0`
 - **כתום**: `#F26331`
+- **עיגולי משתמשים (Avatar)**: `#F83218` (שילוב אדום+כתום)
 - **ליים**: `#B5D334`
 - **לבן כרטיסים**: `#FFFEFE`
 - **אפור טקסט**: `#858585`
@@ -27,6 +28,8 @@
 - **משטח אפור**: `#191919`
 - **כתום**: `#F26331` (זהה ל-Light)
 - **ליים**: `#B5D334` (זהה ל-Light)
+- **עיגולי משתמשים (Avatar)**: `#F83218` (שילוב אדום+כתום)
+- **בועות תשובה בצ׳אט (Other)**: `#004400` (ירוק כהה)
 - **לבן**: `#FFFFFF`
 - **אפור טקסט**: `#EDEDED`
 
@@ -35,16 +38,19 @@
 1. **`src/app/globals.css`**:
    - עודכנו כל טוקני ה-CSS Variables ל-Light mode
    - עודכנו כל טוקני ה-CSS Variables ל-Dark mode
-   - נוספו טוקנים פונקציונליים (`--color-orange`, `--color-lime`, `--color-white`, `--color-gray-text`)
+   - נוספו טוקנים פונקציונליים (`--color-orange`, `--color-lime`, `--color-white`, `--color-gray-text`, `--color-user-avatar`, `--chat-reply-bg`, `--chat-reply-fg`)
 
 2. **`src/app/chat/page.tsx`**:
    - הוחלף `white` קשיח ב-`var(--color-white)`
+   - עודכן רקע רשימת השיחות (Right Pane) ל-`var(--gray-surface)` כדי ש־Dark יהיה אחיד
+   - בועות “other” משתמשות בטוקנים ייעודיים (`--chat-reply-bg/fg`) כדי שב־Dark יהיו ירוקות
 
 3. **`src/components/ProfileCard.tsx`**:
    - הוחלף `white` קשיח ב-`var(--color-white)`
 
 4. **`src/components/MainMenuRight.tsx`**:
    - הוחלף `white` קשיח ב-`var(--color-white)`
+   - תוקן צבע טקסט בפריט פעיל כך שיישאר לבן
 
 ## ✅ בדיקות שבוצעו:
 
@@ -71,9 +77,12 @@
 - `var(--secondary)` - צהוב
 - `var(--gray-surface)` - משטח אפור
 - `var(--color-orange)` - כתום
+- `var(--color-user-avatar)` - עיגול משתמש (Avatar)
 - `var(--color-lime)` - ליים
 - `var(--color-white)` - לבן כרטיסים
 - `var(--color-gray-text)` - אפור טקסט
+- `var(--chat-reply-bg)` - רקע בועת “other” בצ׳אט
+- `var(--chat-reply-fg)` - טקסט בועת “other” בצ׳אט
 
 ### Dark Mode:
 - `var(--color-background)` - רקע כהה
@@ -84,9 +93,12 @@
 - `var(--secondary)` - כתום
 - `var(--gray-surface)` - משטח כהה
 - `var(--color-orange)` - כתום
+- `var(--color-user-avatar)` - עיגול משתמש (Avatar)
 - `var(--color-lime)` - ליים
 - `var(--color-white)` - לבן
 - `var(--color-gray-text)` - אפור טקסט בהיר
+- `var(--chat-reply-bg)` - רקע בועת “other” בצ׳אט (ב־Dark: ירוק)
+- `var(--chat-reply-fg)` - טקסט בועת “other” בצ׳אט
 
 ## ✨ הכל מוכן!
 

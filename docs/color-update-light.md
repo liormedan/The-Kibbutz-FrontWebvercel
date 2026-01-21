@@ -40,8 +40,11 @@
 
 בנוסף יש שימושים נקודתיים בצבעים/טוקנים בקומפוננטים:
 - `src/components/AppLayout.tsx`: header bg `var(--color-background)`, רקע עמוד `var(--gray-1)`, לוגו `var(--accent-9)`
-- `src/components/MainMenuRight.tsx`: פריט פעיל משתמש `var(--accent-11)` / `var(--accent-3)` + רקע אייקון `white`/`var(--gray-3)`
-- `src/app/chat/page.tsx`: בועת “me” משתמשת `var(--accent-9)`; בועת “other” היא `white`; רקעים `var(--gray-1)`/`var(--gray-2)`
+- `src/components/MainMenuRight.tsx`: תוקן כך שצבע הטקסט בפריט פעיל נשאר לבן (מניעת מעבר לשחור)
+- `src/app/chat/page.tsx`:
+  - בועת “me” משתמשת `var(--accent-9)`
+  - בועת “other” משתמשת בטוקנים ייעודיים `--chat-reply-bg/--chat-reply-fg` (ב־Light לבן; ב־Dark ירוק)
+  - רקע רשימת השיחות (Right Pane) עודכן ל־`var(--gray-surface)` כדי שב־Dark יהיה אחיד
 - `src/app/login/page.tsx`: רקע `var(--gray-2)`; קישורים/לוגו `var(--accent-9)`
 - `src/app/notifications/page.tsx`: נקודה לא־נקראה `var(--accent-9)`; כרטיס לא־נקרא `var(--accent-2)`
 
@@ -67,6 +70,10 @@
 - **Lime**: `#B4D434`
 
 אם הם מיועדים לסטטוסים/תגים/קטגוריות, נוכל להוסיף טוקנים חדשים (למשל `--status-warning`, `--status-success`) במקום להלביש אותם על `--secondary`.
+
+### תוספות שבוצעו בפועל אחרי ההטמעה (שקשורות לצ׳אט)
+- **`--color-user-avatar`**: `#F83218` (שילוב בין אדום `#FF0000` לכתום `#F26331`) עבור עיגולי משתמש
+- **`--chat-reply-bg` / `--chat-reply-fg`**: טוקנים ייעודיים לבועת “other” (ב־Dark רקע ירוק `#004400`)
 
 ## 4) נקודות לאישור לפני שמבצעים בקוד
 
