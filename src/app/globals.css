@@ -35,7 +35,7 @@
   /* Gray text/icons - Exact from design files */
 
   /* Chat */
-  --chat-reply-bg: var(--color-white);
+  --chat-reply-bg: #D9D9D9;
   --chat-reply-fg: var(--color-foreground);
 
   /* Friends */
@@ -55,44 +55,25 @@
 
   /* Accent overrides for dark mode - Exact from design files */
   --accent-9: #35C9D0 !important;
-  /* Primary Brand: Turquoise (most common in dark mode screens) */
   --accent-10: #38D8DF !important;
-  /* Alternative turquoise variant */
   --accent-11: #191919 !important;
-  /* Dark surface for active states */
   --accent-a9: #EDEDED !important;
-  /* Text on accent - Light text */
 
-  /* Surfaces - Exact from design files */
   --secondary: #F26331;
-  /* Orange - Same as light mode, exact from design files */
   --gray-surface: #191919;
-  /* Dark gray surface - Most common in dark mode */
   --gray-1: #111111;
-  /* Background - Exact match */
 
-  /* Functional colors from design files */
   --color-orange: #F26331;
-  /* Orange - Exact from design files (same as light) */
   --color-user-avatar: #F83218;
-  /* User avatar circle - blend of #FF0000 (red) and #F26331 (orange), 50/50 */
   --color-lime: #B5D334;
-  /* Lime green - Exact from design files (same as light) */
   --color-white: #FFFFFF;
-  /* White for cards/text - Exact from design files */
   --color-gray-text: #EDEDED;
-  /* Light gray text - Exact from design files */
 
-  /* Chat */
   --chat-reply-bg: #004400;
-  /* Reply bubble green - exact from Dark mode messeges.png */
   --chat-reply-fg: var(--color-white);
 
-  /* Friends */
   --friends-message-btn-bg: #000000;
-  /* Message button (Dark) - black as in design */
 
-  /* Radix variable overrides for dark mode */
   --gray-alpha-5: rgba(255, 255, 255, 0.1);
   --gray-12: #EDEDED;
 }
@@ -102,8 +83,7 @@
 body {
   margin: 0;
   padding: 0;
-  /* Radix UI handles font-family via the Theme component default, or we can enforce it here if needed. */
-  overflow-y: scroll;
+  /* Overflow-y handled on html to prevent double scrollbars */
 }
 
 /* Prevent Radix UI from shifting layout when opening dialogs */
@@ -119,9 +99,9 @@ body[style*="overflow: hidden"] {
 }
 
 html {
-  overflow-y: scroll;
   /* Forces scrollbar to always be visible to prevent layout shift */
-  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  /* Removed scrollbar-gutter: stable; as it can cause issues in RTL/Layout combinations */
 }
 
 /* Override Radix Card Border to be Blue/Accent */

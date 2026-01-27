@@ -71,7 +71,7 @@ export const Header = () => (
                     <ThemeToggle showLabel={false} />
                     <NotificationsPopover />
 
-                    <DropdownMenu.Root>
+                    <DropdownMenu.Root modal={false}>
                         <DropdownMenu.Trigger>
                             <Avatar
                                 size="2"

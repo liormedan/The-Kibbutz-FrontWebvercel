@@ -13,7 +13,6 @@ export const FeedHeader = () => {
             <Flex gap="3">
                 <Button variant="ghost" color="gray" style={{ fontWeight: 'normal' }}>הפופולארים ביותר</Button>
                 <Button variant="ghost" color="gray" style={{ fontWeight: 'normal' }}>חברים</Button>
-                <Button variant="ghost" style={{ fontWeight: 'bold', color: 'black', textDecoration: 'underline', textUnderlineOffset: '4px' }}>האלגוריתם שלנו</Button>
             </Flex>
         </Flex>
     );

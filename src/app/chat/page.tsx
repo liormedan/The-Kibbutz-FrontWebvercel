@@ -134,24 +134,24 @@ export default function ChatPage() {
                             <DropdownMenu.Trigger>
                                 <IconButton variant="ghost" color="gray"><DotsHorizontalIcon /></IconButton>
                             </DropdownMenu.Trigger>
-                        <DropdownMenu.Content align="end">
-                                <DropdownMenu.Item>
-                                    <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                        <DropdownMenu.Content align="end" style={{ direction: 'rtl', textAlign: 'right' }}>
+                                <DropdownMenu.Item style={{ direction: 'rtl', textAlign: 'right' }}>
+                                    <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%', direction: 'rtl', textAlign: 'right' }}>
                                         צפה בפרופיל
                                     </Link>
                                 </DropdownMenu.Item>
-                                <DropdownMenu.Item>
-                                    <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                <DropdownMenu.Item style={{ direction: 'rtl', textAlign: 'right' }}>
+                                    <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%', direction: 'rtl', textAlign: 'right' }}>
                                         הגדרות התראות
                                     </Link>
                                 </DropdownMenu.Item>
                                 <DropdownMenu.Separator />
-                                <DropdownMenu.Item color="red">
-                                    <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                <DropdownMenu.Item color="red" style={{ direction: 'rtl', textAlign: 'right' }}>
+                                    <Link href="/settings" style={{ textDecoration: 'none', color: 'inherit', width: '100%', direction: 'rtl', textAlign: 'right' }}>
                                         חסום משתמש (הגדרות)
                                     </Link>
                                 </DropdownMenu.Item>
-                                <DropdownMenu.Item color="red" onClick={handleDeleteChat}>
+                                <DropdownMenu.Item color="red" onClick={handleDeleteChat} style={{ direction: 'rtl', textAlign: 'right' }}>
                                     מחק שיחה
                                 </DropdownMenu.Item>
                             </DropdownMenu.Content>

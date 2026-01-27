@@ -29,7 +29,7 @@ export const NotificationsPopover = () => {
     }
 
     return (
-        <Popover.Root>
+        <Popover.Root modal={false}>
             <Popover.Trigger>
                 <Button variant="ghost" color="gray" style={{ padding: 0, width: '36px', height: '36px', color: 'var(--gray-12)' }}>
                     <BellIcon width="24" height="24" />
