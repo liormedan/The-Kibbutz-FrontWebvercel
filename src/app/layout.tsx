@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { AppLayout } from "../components/AppLayout";
 import { NavigationSidebar } from "../components/MainMenuRight";
+import { PortfolioProvider } from "../context/PortfolioContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
 
         <ThemeProvider>
-          <AppLayout navigation={<NavigationSidebar />}>
-            {children}
-          </AppLayout>
+          <PortfolioProvider>
+            <AppLayout navigation={<NavigationSidebar />}>
+              {children}
+            </AppLayout>
+          </PortfolioProvider>
         </ThemeProvider>
       </body>
     </html>

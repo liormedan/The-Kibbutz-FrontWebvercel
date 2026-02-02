@@ -11,6 +11,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export const Header = () => (
     <Box
+        className="app-header"
         style={{
             backgroundColor: 'var(--color-background)',
             backdropFilter: 'blur(10px)',

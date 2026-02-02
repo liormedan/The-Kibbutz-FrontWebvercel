@@ -11,7 +11,7 @@ export const NavigationSidebar = () => {
 
     const navItems = [
         { label: "פיד", icon: <HomeIcon width="20" height="20" />, path: "/" },
-        { label: "תיקי עבודות", icon: <BackpackIcon width="18" height="18" />, path: "/portfolios" },
+        { label: "תיק עבודות", icon: <BackpackIcon width="18" height="18" />, path: "/portfolios" },
         { label: "צ'אטים", icon: <ChatBubbleIcon width="20" height="20" />, path: "/chat" },
         { label: "חברים", icon: <PersonIcon width="20" height="20" />, path: "/friends" },
         { label: "הגדרות", icon: <GearIcon width="20" height="20" />, path: "/settings" },
