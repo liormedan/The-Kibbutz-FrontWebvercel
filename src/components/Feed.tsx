@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 
-import { Box, Card, Flex, Text, Avatar, TextArea, IconButton, Separator, Button } from "@radix-ui/themes";
-import { ImageIcon, FaceIcon, PaperPlaneIcon, HeartIcon, ChatBubbleIcon, Share1Icon, DotsHorizontalIcon, HeartFilledIcon } from "@radix-ui/react-icons";
+import { Box, Card, Flex, Text, Avatar, TextArea, IconButton, Separator, Button, DropdownMenu } from "@radix-ui/themes";
+import {
+    ImageIcon, FaceIcon, PaperPlaneIcon, HeartIcon, ChatBubbleIcon,
+    Share1Icon, DotsHorizontalIcon, HeartFilledIcon,
+    ExclamationTriangleIcon, Link2Icon, EyeNoneIcon, Pencil1Icon, TrashIcon
+} from "@radix-ui/react-icons";
 import Image from "next/image";
 import { ReplyComposer } from "./ReplyComposer";
 import { ShareComposer } from "./ShareComposer";
+import { ReportDialog, EditPostDialog, DeleteConfirmDialog } from "./feed/PostDialogs";
 
 export const FeedHeader = () => {
     return (
@@ -52,10 +57,16 @@ export const PostCard = () => {
     const [likesCount, setLikesCount] = useState(24);
     const [showReply, setShowReply] = useState(false);
     const [showShare, setShowShare] = useState(false);
+
+    // Dialog States
+    const [isReportOpen, setIsReportOpen] = useState(false);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
     const [replies, setReplies] = useState<string[]>([]);
     const [shares, setShares] = useState<string[]>([]);
 
-    const postContent = "בדיוק סיימנו לשתול את הגינה החדשה! הקהילה מתגבשת בצורה יפהפייה 🌱 #גינהקהילתית #הקיבוץ";
+    const [content, setContent] = useState("בדיוק סיימנו לשתול את הגינה החדשה! הקהילה מתגבשת בצורה יפהפייה 🌱 #גינהקהילתית #הקיבוץ");
 
     const handleLike = () => {
         if (isLiked) {
@@ -90,10 +101,43 @@ export const PostCard = () => {
         console.log("Share sent:", message);
     };
 
+    const handleAction = (action: string) => {
+        if (action === 'copy') {
+            alert("הקישור לפוסט הועתק ללוח"); // Use toast in real app
+        } else if (action === 'report') {
+            setIsReportOpen(true);
+        } else if (action === 'hide') {
+            if (confirm("האם להסתיר את הפוסט הזה מהפיד שלך?")) {
+                alert("הפוסט הוסתר");
+            }
+        } else if (action === 'delete') {
+            setIsDeleteOpen(true);
+        } else if (action === 'edit') {
+            setIsEditOpen(true);
+        }
+    };
+
+    // Dialog Handlers
+    const handleReportSubmit = (reason: string) => {
+        console.log(`Reported for: ${reason}`);
+        alert("תודה. הדיווח התקבל.");
+    };
+
+    const handleEditSave = (newContent: string) => {
+        setContent(newContent);
+        // alert("הפוסט עודכן בהצלחה!");
+    };
+
+    const handleDeleteConfirm = () => {
+        // Here you would delete the post from the list/backend
+        console.log("Deleting post...");
+        alert("הפוסט נמחק בהצלחה.");
+    };
+
     return (
         <Card size="1" style={{ overflow: 'hidden', padding: '16px' }}>
             {/* Header */}
-            <Flex justify="between" align="center">
+            <Flex justify="between" align="center" style={{ direction: 'rtl' }}>
                 <Flex gap="3" align="center">
                     <Avatar fallback="SC" size="3" radius="full" color="teal" />
                     <Box>
@@ -104,13 +148,41 @@ export const PostCard = () => {
                         <Text size="1" color="gray">לפני שעה</Text>
                     </Box>
                 </Flex>
-                <IconButton variant="ghost" color="gray"><DotsHorizontalIcon /></IconButton>
+
+                <DropdownMenu.Root modal={false}>
+                    <DropdownMenu.Trigger>
+                        <IconButton variant="ghost" color="gray">
+                            <DotsHorizontalIcon />
+                        </IconButton>
+                    </DropdownMenu.Trigger>
+                    <DropdownMenu.Content>
+                        <DropdownMenu.Item color="red" onClick={() => handleAction('report')}>
+                            <ExclamationTriangleIcon /> דווח
+                        </DropdownMenu.Item>
+                        <DropdownMenu.Item onClick={() => handleAction('copy')}>
+                            <Link2Icon /> העתק קישור
+                        </DropdownMenu.Item>
+                        <DropdownMenu.Item onClick={() => handleAction('hide')}>
+                            <EyeNoneIcon /> הסתר
+                        </DropdownMenu.Item>
+
+                        <DropdownMenu.Separator />
+
+                        <DropdownMenu.Label>פעולות שלי</DropdownMenu.Label>
+                        <DropdownMenu.Item onClick={() => handleAction('edit')}>
+                            <Pencil1Icon /> ערוך
+                        </DropdownMenu.Item>
+                        <DropdownMenu.Item color="red" onClick={() => handleAction('delete')}>
+                            <TrashIcon /> מחק
+                        </DropdownMenu.Item>
+                    </DropdownMenu.Content>
+                </DropdownMenu.Root>
             </Flex>
 
             {/* Content */}
             <Box mt="3">
                 <Text size="3" style={{ lineHeight: '1.5' }}>
-                    {postContent}
+                    {content}
                 </Text>
             </Box>
 
@@ -136,15 +208,15 @@ export const PostCard = () => {
                         onClick={handleLike}
                         isActive={isLiked}
                     />
-                    <ButtonIconText 
-                        icon={<ChatBubbleIcon width="18" height="18" />} 
-                        label="תגובה" 
+                    <ButtonIconText
+                        icon={<ChatBubbleIcon width="18" height="18" />}
+                        label="תגובה"
                         onClick={handleReplyClick}
                         isActive={showReply}
                     />
-                    <ButtonIconText 
-                        icon={<Share1Icon width="18" height="18" />} 
-                        label="שתף" 
+                    <ButtonIconText
+                        icon={<Share1Icon width="18" height="18" />}
+                        label="שתף"
                         onClick={handleShareClick}
                         isActive={showShare}
                     />
@@ -161,14 +233,31 @@ export const PostCard = () => {
                 <ShareComposer
                     onSend={handleSendShare}
                     onCancel={() => setShowShare(false)}
-                    sharedContent={postContent}
+                    sharedContent={content}
                     placeholder="מה אתה חושב על זה?"
                 />
             )}
+
+            {/* Dialogs */}
+            <ReportDialog
+                open={isReportOpen}
+                onOpenChange={setIsReportOpen}
+                onReport={handleReportSubmit}
+            />
+            <EditPostDialog
+                open={isEditOpen}
+                onOpenChange={setIsEditOpen}
+                initialContent={content}
+                onSave={handleEditSave}
+            />
+            <DeleteConfirmDialog
+                open={isDeleteOpen}
+                onOpenChange={setIsDeleteOpen}
+                onConfirm={handleDeleteConfirm}
+            />
         </Card>
     );
 };
-
 const ButtonIconText = ({ icon, label, onClick, isActive }: { icon: React.ReactNode, label: string, onClick?: () => void, isActive?: boolean }) => (
     <Button
         variant="ghost"
