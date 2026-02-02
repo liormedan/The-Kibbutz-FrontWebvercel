@@ -39,7 +39,7 @@ export default function ChatPage() {
 
     const handleSendMessage = () => {
         if (!messageInput.trim()) return;
-        const newMsg = {
+        const newMsg: Message = {
             id: Date.now(),
             sender: "me",
             text: messageInput,
@@ -54,7 +54,7 @@ export default function ChatPage() {
     const handleSendReply = (replyText: string) => {
         if (!replyText.trim() || !replyingTo) return;
         const repliedMessage = chatMessages.find(m => m.id === replyingTo);
-        const newMsg = {
+        const newMsg: Message = {
             id: Date.now(),
             sender: "me",
             text: replyText,
@@ -163,7 +163,7 @@ export default function ChatPage() {
                             <DropdownMenu.Trigger>
                                 <IconButton variant="ghost" color="gray"><DotsHorizontalIcon /></IconButton>
                             </DropdownMenu.Trigger>
-                        <DropdownMenu.Content align="end" style={{ direction: 'rtl', textAlign: 'right' }}>
+                            <DropdownMenu.Content align="end" style={{ direction: 'rtl', textAlign: 'right' }}>
                                 <DropdownMenu.Item style={{ direction: 'rtl', textAlign: 'right' }}>
                                     <Link href="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%', direction: 'rtl', textAlign: 'right' }}>
                                         צפה בפרופיל
@@ -279,12 +279,12 @@ export default function ChatPage() {
                                 onKeyDown={handleKeyDown}
                             >
                             </TextField.Root>
-                            <IconButton 
-                                variant="solid" 
-                                size="3" 
+                            <IconButton
+                                variant="solid"
+                                size="3"
                                 onClick={handleSendMessage}
-                                style={{ 
-                                    backgroundColor: 'var(--accent-9)', 
+                                style={{
+                                    backgroundColor: 'var(--accent-9)',
                                     color: 'var(--color-white)',
                                     border: 'none'
                                 }}
