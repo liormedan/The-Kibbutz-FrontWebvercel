@@ -66,13 +66,20 @@ export default function PortfoliosPage() {
 
             {/* Header Section */}
             <Flex justify="between" align="center">
-                <Box>
-                    <Heading size="6" mb="1">תיקי עבודות (Portfolios)</Heading>
-                    <Text color="gray">היצירות והפרויקטים של חברי הקהילה</Text>
-                </Box>
                 <Dialog.Root open={openUpload} onOpenChange={setOpenUpload}>
                     <Dialog.Trigger>
-                        <Button size="2" variant="solid">
+                        <Button 
+                            size="2" 
+                            variant="solid"
+                            className="add-project-button"
+                            style={{
+                                backgroundColor: '#2b868a',
+                                color: 'var(--color-white)',
+                                fontWeight: 500,
+                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                border: '1px solid rgba(0, 0, 0, 0.1)'
+                            }}
+                        >
                             <PlusIcon /> הוסף פרויקט חדש
                         </Button>
                     </Dialog.Trigger>
@@ -117,13 +124,18 @@ export default function PortfoliosPage() {
                         </Flex>
                     </Dialog.Content>
                 </Dialog.Root>
+                <Box style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                    <Heading size="6" mb="1">תיקי עבודות (Portfolios)</Heading>
+                    <Text color="gray">היצירות והפרויקטים של חברי הקהילה</Text>
+                </Box>
+                <Box style={{ width: '200px' }}></Box>
             </Flex>
 
             {/* Filter Tabs */}
             {/* The Tabs.Root and Tabs.List components were removed as per instruction. */}
             {/* The individual Tabs.Trigger components are no longer functional without the Tabs.Root context. */}
             {/* If filtering functionality is still desired, it would need to be re-implemented with different components. */}
-            <Flex gap="2" mb="4">
+            <Flex gap="2" mb="4" justify="center">
                 <Button variant="soft" value="all">כל העבודות</Button>
                 <Button variant="soft" value="likes">מועדפים שלי ❤️</Button>
                 <Button variant="soft" value="my_work">העבודות שלי</Button>

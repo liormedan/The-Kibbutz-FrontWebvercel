@@ -52,8 +52,8 @@ export const NavigationSidebar = () => {
                                             padding: '0 16px',
                                             borderRadius: '14px',
                                             overflow: 'hidden',
-                                            backgroundColor: isActive ? 'var(--accent-9)' : 'transparent',
-                                            border: isActive ? '1px solid var(--accent-9)' : '1px solid transparent',
+                                            backgroundColor: isActive ? '#2b868a' : 'transparent',
+                                            border: isActive ? '1px solid #2b868a' : '1px solid transparent',
                                             boxShadow: isActive ? '0 2px 10px rgba(0,0,0,0.08)' : 'none',
                                             color: isActive ? 'var(--color-white)' : 'var(--color-foreground)',
                                             direction: 'rtl',
@@ -82,7 +82,7 @@ export const NavigationSidebar = () => {
                                             >
                                                 <Box
                                                     style={{
-                                                        color: isActive ? 'var(--accent-9)' : 'var(--color-foreground)',
+                                                        color: isActive ? '#2b868a' : 'var(--color-foreground)',
                                                         display: 'flex',
                                                         alignItems: 'center',
                                                         justifyContent: 'center'

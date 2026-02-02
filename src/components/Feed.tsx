@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Box, Card, Flex, Text, Avatar, TextArea, IconButton, Separator, Button } from "@radix-ui/themes";
 import { ImageIcon, FaceIcon, PaperPlaneIcon, HeartIcon, ChatBubbleIcon, Share1Icon, DotsHorizontalIcon, HeartFilledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { ReplyComposer } from "./ReplyComposer";
+import { ShareComposer } from "./ShareComposer";
 
 export const FeedHeader = () => {
     return (
@@ -48,6 +50,12 @@ export const FeedComposer = () => {
 export const PostCard = () => {
     const [isLiked, setIsLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(24);
+    const [showReply, setShowReply] = useState(false);
+    const [showShare, setShowShare] = useState(false);
+    const [replies, setReplies] = useState<string[]>([]);
+    const [shares, setShares] = useState<string[]>([]);
+
+    const postContent = "בדיוק סיימנו לשתול את הגינה החדשה! הקהילה מתגבשת בצורה יפהפייה 🌱 #גינהקהילתית #הקיבוץ";
 
     const handleLike = () => {
         if (isLiked) {
@@ -56,6 +64,30 @@ export const PostCard = () => {
             setLikesCount(prev => prev + 1);
         }
         setIsLiked(!isLiked);
+    };
+
+    const handleReplyClick = () => {
+        setShowReply(!showReply);
+        setShowShare(false); // Close share if open
+    };
+
+    const handleShareClick = () => {
+        setShowShare(!showShare);
+        setShowReply(false); // Close reply if open
+    };
+
+    const handleSendReply = (message: string) => {
+        setReplies([...replies, message]);
+        setShowReply(false);
+        // In a real app, you would send this to your backend
+        console.log("Reply sent:", message);
+    };
+
+    const handleSendShare = (message: string) => {
+        setShares([...shares, message]);
+        setShowShare(false);
+        // In a real app, you would send this to your backend
+        console.log("Share sent:", message);
     };
 
     return (
@@ -78,7 +110,7 @@ export const PostCard = () => {
             {/* Content */}
             <Box mt="3">
                 <Text size="3" style={{ lineHeight: '1.5' }}>
-                    בדיוק סיימנו לשתול את הגינה החדשה! הקהילה מתגבשת בצורה יפהפייה 🌱 #גינהקהילתית #הקיבוץ
+                    {postContent}
                 </Text>
             </Box>
 
@@ -104,10 +136,35 @@ export const PostCard = () => {
                         onClick={handleLike}
                         isActive={isLiked}
                     />
-                    <ButtonIconText icon={<ChatBubbleIcon width="18" height="18" />} label="תגובה" />
-                    <ButtonIconText icon={<Share1Icon width="18" height="18" />} label="שתף" />
+                    <ButtonIconText 
+                        icon={<ChatBubbleIcon width="18" height="18" />} 
+                        label="תגובה" 
+                        onClick={handleReplyClick}
+                        isActive={showReply}
+                    />
+                    <ButtonIconText 
+                        icon={<Share1Icon width="18" height="18" />} 
+                        label="שתף" 
+                        onClick={handleShareClick}
+                        isActive={showShare}
+                    />
                 </Flex>
             </Box>
+            {showReply && (
+                <ReplyComposer
+                    onSend={handleSendReply}
+                    onCancel={() => setShowReply(false)}
+                    replyTo="שרה כהן"
+                />
+            )}
+            {showShare && (
+                <ShareComposer
+                    onSend={handleSendShare}
+                    onCancel={() => setShowShare(false)}
+                    sharedContent={postContent}
+                    placeholder="מה אתה חושב על זה?"
+                />
+            )}
         </Card>
     );
 };

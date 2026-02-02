@@ -3,6 +3,7 @@
 import { Box, Flex, Text, Avatar, TextField, ScrollArea, Card, IconButton, Separator, DropdownMenu } from "@radix-ui/themes";
 import { MagnifyingGlassIcon, PaperPlaneIcon, DotsHorizontalIcon, FaceIcon, ImageIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { ReplyComposer } from "@/components/ReplyComposer";
 
 import { useState } from "react";
 
@@ -15,7 +16,15 @@ const conversations = [
     { id: 5, name: "ועדת תרבות", lastMessage: "פרוטוקול ישיבה אחרונה", time: "יום א'", unread: 5 },
 ];
 
-const messages = [
+interface Message {
+    id: number;
+    sender: "me" | "other";
+    text: string;
+    time: string;
+    replyTo?: number;
+}
+
+const messages: Message[] = [
     { id: 1, sender: "me", text: "היי שרה, מה קורה?", time: "10:00" },
     { id: 2, sender: "other", text: "הכל טוב! מה איתך?", time: "10:05" },
     { id: 3, sender: "me", text: "מעולה. רציתי לשאול לגבי מחר.", time: "10:10" },
@@ -26,6 +35,7 @@ export default function ChatPage() {
     const [activeChatId, setActiveChatId] = useState(1);
     const [messageInput, setMessageInput] = useState("");
     const [chatMessages, setChatMessages] = useState(messages);
+    const [replyingTo, setReplyingTo] = useState<number | null>(null);
 
     const handleSendMessage = () => {
         if (!messageInput.trim()) return;
@@ -33,14 +43,33 @@ export default function ChatPage() {
             id: Date.now(),
             sender: "me",
             text: messageInput,
-            time: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
+            time: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' }),
+            replyTo: replyingTo || undefined
         };
         setChatMessages([...chatMessages, newMsg]);
         setMessageInput("");
+        setReplyingTo(null);
+    };
+
+    const handleSendReply = (replyText: string) => {
+        if (!replyText.trim() || !replyingTo) return;
+        const repliedMessage = chatMessages.find(m => m.id === replyingTo);
+        const newMsg = {
+            id: Date.now(),
+            sender: "me",
+            text: replyText,
+            time: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' }),
+            replyTo: replyingTo
+        };
+        setChatMessages([...chatMessages, newMsg]);
+        setReplyingTo(null);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') handleSendMessage();
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
+        }
     };
 
     const handleDeleteChat = () => {
@@ -162,32 +191,79 @@ export default function ChatPage() {
                     <ScrollArea type="always" scrollbars="vertical" style={{ flexGrow: 1, background: 'var(--gray-1)', direction: 'rtl' }}>
                         <Flex direction="column" gap="3" p="4" style={{ minHeight: '100%' }}>
                             <Text align="center" size="1" color="gray" my="2">היום</Text>
-                            {chatMessages.map((msg) => (
-                                <Flex key={msg.id} justify={msg.sender === 'me' ? 'start' : 'end'}>
-                                    <Box
-                                        style={{
-                                            maxWidth: '70%',
-                                            padding: '10px 14px',
-                                            borderRadius: '16px',
-                                            background: msg.sender === 'me' ? 'var(--accent-9)' : 'var(--chat-reply-bg)',
-                                            color: msg.sender === 'me' ? 'var(--color-white)' : 'var(--chat-reply-fg)',
-                                            border: msg.sender === 'other' ? '1px solid var(--gray-4)' : 'none',
-                                            borderBottomRightRadius: msg.sender === 'me' ? '4px' : '16px',
-                                            borderBottomLeftRadius: msg.sender === 'other' ? '4px' : '16px',
-                                            boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-                                            wordBreak: 'break-word',
-                                            animation: 'fadeIn 0.2s ease-in-out' // optional animation class if available globally or inline
-                                        }}
-                                    >
-                                        <Text size="2">{msg.text}</Text>
-                                        <Flex justify="end" mt="1">
-                                            <Text size="1" style={{ opacity: 0.7, fontSize: '10px' }}>{msg.time}</Text>
+                            {chatMessages.map((msg) => {
+                                const repliedMessage = msg.replyTo ? chatMessages.find(m => m.id === msg.replyTo) : null;
+                                return (
+                                    <Flex key={msg.id} justify={msg.sender === 'me' ? 'start' : 'end'} direction="column" gap="1">
+                                        {repliedMessage && (
+                                            <Box
+                                                style={{
+                                                    maxWidth: '70%',
+                                                    padding: '6px 10px',
+                                                    borderRadius: '8px',
+                                                    background: 'var(--gray-3)',
+                                                    border: '1px solid var(--gray-5)',
+                                                    fontSize: '11px',
+                                                    opacity: 0.7,
+                                                    marginBottom: '4px'
+                                                }}
+                                            >
+                                                <Text size="1" weight="bold">{repliedMessage.sender === 'me' ? 'אתה' : conversations.find(c => c.id === activeChatId)?.name}</Text>
+                                                <Text size="1" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '200px' }}>
+                                                    {repliedMessage.text}
+                                                </Text>
+                                            </Box>
+                                        )}
+                                        <Flex justify={msg.sender === 'me' ? 'start' : 'end'}>
+                                            <Box
+                                                style={{
+                                                    maxWidth: '70%',
+                                                    padding: '10px 14px',
+                                                    borderRadius: '16px',
+                                                    background: msg.sender === 'me' ? 'var(--accent-9)' : 'var(--chat-reply-bg)',
+                                                    color: msg.sender === 'me' ? 'var(--color-white)' : 'var(--chat-reply-fg)',
+                                                    border: msg.sender === 'other' ? '1px solid var(--gray-4)' : 'none',
+                                                    borderBottomRightRadius: msg.sender === 'me' ? '4px' : '16px',
+                                                    borderBottomLeftRadius: msg.sender === 'other' ? '4px' : '16px',
+                                                    boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                                                    wordBreak: 'break-word',
+                                                    animation: 'fadeIn 0.2s ease-in-out',
+                                                    cursor: 'pointer',
+                                                    position: 'relative'
+                                                }}
+                                                onClick={() => msg.sender === 'other' && setReplyingTo(msg.id)}
+                                                onMouseEnter={(e) => {
+                                                    if (msg.sender === 'other') {
+                                                        e.currentTarget.style.opacity = '0.9';
+                                                    }
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.opacity = '1';
+                                                }}
+                                            >
+                                                <Text size="2">{msg.text}</Text>
+                                                <Flex justify="end" mt="1">
+                                                    <Text size="1" style={{ opacity: 0.7, fontSize: '10px' }}>{msg.time}</Text>
+                                                </Flex>
+                                            </Box>
                                         </Flex>
-                                    </Box>
-                                </Flex>
-                            ))}
+                                    </Flex>
+                                );
+                            })}
                         </Flex>
                     </ScrollArea>
+
+                    {/* Reply Composer */}
+                    {replyingTo && (
+                        <Box p="2" style={{ background: 'var(--gray-surface)', borderTop: '1px solid var(--gray-alpha-5)' }}>
+                            <ReplyComposer
+                                onSend={handleSendReply}
+                                onCancel={() => setReplyingTo(null)}
+                                placeholder="כתוב תגובה..."
+                                replyTo={conversations.find(c => c.id === activeChatId)?.name}
+                            />
+                        </Box>
+                    )}
 
                     {/* Input Area */}
                     <Box p="3" style={{ background: 'var(--color-background)', borderTop: '1px solid var(--gray-alpha-5)' }}>
@@ -195,7 +271,7 @@ export default function ChatPage() {
                             <IconButton variant="ghost" color="gray"><ImageIcon /></IconButton>
                             <IconButton variant="ghost" color="gray"><FaceIcon /></IconButton>
                             <TextField.Root
-                                placeholder="כתוב הודעה..."
+                                placeholder={replyingTo ? "כתוב הודעה..." : "כתוב הודעה..."}
                                 style={{ flexGrow: 1 }}
                                 size="3"
                                 value={messageInput}
