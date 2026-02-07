@@ -15,8 +15,8 @@ import { ReportDialog, EditPostDialog, DeleteConfirmDialog } from "./feed/PostDi
 
 export const FeedHeader = () => {
     return (
-        <Flex justify="between" align="center" mb="2">
-            <Text size="6" weight="bold">סוג הפיד</Text>
+        <Flex justify="between" align="center" mb="2" wrap="wrap" gap="2">
+            <Text size={{ initial: "5", sm: "6" }} weight="bold">סוג הפיד</Text>
             <Flex gap="3">
                 <Button variant="ghost" color="gray" style={{ fontWeight: 'normal' }}>הפופולארים ביותר</Button>
                 <Button variant="ghost" color="gray" style={{ fontWeight: 'normal' }}>חברים</Button>
@@ -37,7 +37,7 @@ export const FeedComposer = () => {
                         size="3"
                         style={{ height: '80px', resize: 'none' }}
                     />
-                    <Flex justify="between" mt="4" align="center">
+                    <Flex justify="between" mt="4" align="center" wrap="wrap" gap="2">
                         <Flex gap="3">
                             <ButtonIconText icon={<ImageIcon />} label="תמונה" />
                             <ButtonIconText icon={<FaceIcon />} label="רגש" />
@@ -187,7 +187,7 @@ export const PostCard = () => {
             </Box>
 
             {/* Image Placeholder */}
-            <Box mt="3" style={{ position: 'relative', width: '100%', height: '300px', background: 'var(--gray-4)', borderRadius: '12px' }}>
+            <Box mt="3" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: 'var(--gray-4)', borderRadius: '12px' }}>
                 {/* Real implementation would use Next.js Image */}
                 <Flex align="center" justify="center" style={{ height: '100%' }}>
                     <Text color="gray">תמונת פוסט</Text>
@@ -201,7 +201,7 @@ export const PostCard = () => {
                     <Text size="1" color="gray">5 תגובות</Text>
                 </Flex>
                 <Separator size="4" />
-                <Flex justify="between" pt="2">
+                <Flex justify="between" pt="2" gap="2">
                     <ButtonIconText
                         icon={isLiked ? <HeartFilledIcon color="var(--red-9)" width="18" height="18" /> : <HeartIcon width="18" height="18" />}
                         label="לייק"
