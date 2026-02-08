@@ -177,7 +177,9 @@ export const AppLayout = ({ children, navigation, widgets }: AppLayoutProps) => 
                     )}
                 </Grid>
             </Container>
-            <MobileNavBar />
+            <Box display={{ initial: 'block', md: 'none' }}>
+                <MobileNavBar />
+            </Box>
         </Box>
     );
 };
