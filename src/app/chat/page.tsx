@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Flex, Text, Avatar, TextField, ScrollArea, Card, IconButton, Separator, DropdownMenu } from "@radix-ui/themes";
-import { MagnifyingGlassIcon, PaperPlaneIcon, DotsHorizontalIcon, FaceIcon, ImageIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, PaperPlaneIcon, DotsHorizontalIcon, FaceIcon, ImageIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { ReplyComposer } from "@/components/ReplyComposer";
 
@@ -36,6 +36,7 @@ export default function ChatPage() {
     const [messageInput, setMessageInput] = useState("");
     const [chatMessages, setChatMessages] = useState(messages);
     const [replyingTo, setReplyingTo] = useState<number | null>(null);
+    const [mobileView, setMobileView] = useState<'list' | 'chat'>('list'); // New state for mobile navigation
 
     const handleSendMessage = () => {
         if (!messageInput.trim()) return;
@@ -76,8 +77,12 @@ export default function ChatPage() {
         const updatedConversations = conversations.filter(c => c.id !== activeChatId);
         // Note: In a real app we would update the state, but 'conversations' is a const outside component. 
         // For this demo, we'd need to move 'conversations' into state or just alert.
-        // Let's assume we just navigate away or alert for now since moving const to state requires bigger refactor.
         alert("השיחה נמחקה (בהדגמה)");
+    };
+
+    const handleChatSelect = (id: number) => {
+        setActiveChatId(id);
+        setMobileView('chat');
     };
 
     return (
@@ -85,7 +90,19 @@ export default function ChatPage() {
             <Flex style={{ height: '100%' }}>
 
                 {/* Right Pane: Chat List */}
-                <Box style={{ width: '300px', borderLeft: '1px solid var(--gray-alpha-5)', background: 'var(--gray-surface)', direction: 'rtl', textAlign: 'right' }}>
+                <Box
+                    style={{
+                        width: '100%',
+                        borderLeft: '1px solid var(--gray-alpha-5)',
+                        background: 'var(--gray-surface)',
+                        direction: 'rtl',
+                        textAlign: 'right',
+                        flexShrink: 0
+                    }}
+                    // On mobile (initial): width 100%, maxWidth none. On desktop (md): maxWidth 300px.
+                    width={{ initial: '100%', md: '300px' }}
+                    display={{ initial: mobileView === 'list' ? 'block' : 'none', md: 'block' }} // Hide on mobile if showing chat
+                >
                     <Box p="3">
                         <Text size="4" weight="bold" mb="3" as="div">הודעות</Text>
                         <TextField.Root placeholder="חפש שיחה...">
@@ -97,7 +114,7 @@ export default function ChatPage() {
                             {conversations.map((chat) => (
                                 <Box
                                     key={chat.id}
-                                    onClick={() => setActiveChatId(chat.id)}
+                                    onClick={() => handleChatSelect(chat.id)}
                                     p="3"
                                     style={{
                                         cursor: 'pointer',
@@ -141,10 +158,21 @@ export default function ChatPage() {
                 </Box>
 
                 {/* Left Pane: Active Chat */}
-                <Flex direction="column" style={{ flexGrow: 1, position: 'relative', direction: 'rtl', textAlign: 'right' }}>
+                <Flex
+                    direction="column"
+                    style={{ flexGrow: 1, position: 'relative', direction: 'rtl', textAlign: 'right' }}
+                    display={{ initial: mobileView === 'chat' ? 'flex' : 'none', md: 'flex' }} // Hide on mobile if list is shown
+                >
                     {/* Chat Header */}
                     <Flex justify="between" align="center" p="3" style={{ borderBottom: '1px solid var(--gray-alpha-5)', background: 'var(--color-background)' }}>
                         <Flex gap="3" align="center" style={{ flexDirection: 'row-reverse' }}>
+                            {/* Back Button for Mobile */}
+                            <Box display={{ initial: 'block', md: 'none' }}>
+                                <IconButton variant="ghost" onClick={() => setMobileView('list')}>
+                                    <ArrowRightIcon width="24" height="24" />
+                                </IconButton>
+                            </Box>
+
                             <Avatar
                                 fallback={conversations.find(c => c.id === activeChatId)?.name[0] || "?"}
                                 size="2"

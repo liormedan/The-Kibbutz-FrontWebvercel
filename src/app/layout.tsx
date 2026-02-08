@@ -20,6 +20,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "The Kibbutz",
   description: "Community Portfolio Network",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Kibbutz",
+  },
 };
 
 export default function RootLayout({

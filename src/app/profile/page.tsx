@@ -92,7 +92,7 @@ export default function ProfilePage() {
                                 backgroundColor: 'var(--gray-3)'
                             }}
                         />
-                        <Flex gap="3" mb="2">
+                        <Flex gap="2" mb="2" align="end" direction={{ initial: 'column', xs: 'row' }}>
                             <Button
                                 variant="outline"
                                 color="gray"

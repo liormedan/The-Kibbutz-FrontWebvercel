@@ -1,0 +1,20 @@
+{
+    "name": "The Kibbutz",
+    "short_name": "Kibbutz",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FBF1F1",
+    "theme_color": "#30C2C9",
+    "icons": [
+        {
+            "src": "/yairarnondemo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/yairarnondemo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

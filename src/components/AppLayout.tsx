@@ -27,7 +27,7 @@ export const Header = () => (
         }}
     >
         <Container size="4">
-            <Flex justify="between" align="center" style={{ height: '100%' }}>
+            <Flex justify="between" align="center" style={{ height: '100%' }} px={{ initial: '4', md: '2' }}>
                 {/* Right: Logo & Icons */}
                 <Flex align="center" gap="5">
                     <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
