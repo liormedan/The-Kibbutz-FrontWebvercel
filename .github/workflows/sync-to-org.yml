@@ -1,0 +1,29 @@
+name: Sync to org repo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror push to org repo
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          # מוסיף remote לריפו בארגון
+          git remote add target https://x-access-token:${TARGET_REPO_PAT}@github.com/the-kibbutz/The-Kibbutz-Frontend-web.git
+
+          # דוחף את ה-main שלך ל-main בארגון
+          git push target main:main
+        env:
+          TARGET_REPO_PAT: ${{ secrets.TARGET_REPO_PAT }}
